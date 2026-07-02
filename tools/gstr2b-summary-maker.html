@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSTR-2B Summary Maker — Clean ITR</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root { --bd:#d0d5dd; --hd:#1f3a5f; --hd2:#2c5282; --bg:#f7f9fc; --accent:#2c5282; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; margin:0; padding:24px; background:var(--bg); color:#1a202c; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .sub { color:#667085; font-size:13px; margin-bottom:20px; }
+  .controls { background:#fff; border:1px solid var(--bd); border-radius:10px; padding:16px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+  input[type=file] { font-size:13px; }
+  button { background:var(--accent); color:#fff; border:0; padding:9px 18px; border-radius:7px; font-size:14px; cursor:pointer; }
+  button:disabled { background:#9aa5b1; cursor:not-allowed; }
+  button.sec { background:#fff; color:var(--accent); border:1px solid var(--accent); }
+  #status { font-size:13px; color:#475467; margin:14px 0; white-space:pre-wrap; }
+  .cards { display:flex; flex-wrap:wrap; gap:12px; margin:18px 0; }
+  .card { background:#fff; border:1px solid var(--bd); border-radius:10px; padding:14px 18px; min-width:150px; }
+  .card .k { font-size:12px; color:#667085; }
+  .card .v { font-size:20px; font-weight:700; color:var(--hd); margin-top:2px; }
+  .tabs { display:flex; flex-wrap:wrap; gap:6px; margin:18px 0 0; }
+  .tab { padding:8px 14px; border:1px solid var(--bd); border-bottom:0; border-radius:8px 8px 0 0; background:#eef2f7; cursor:pointer; font-size:13px; }
+  .tab.active { background:#fff; font-weight:600; color:var(--accent); }
+  .panel { background:#fff; border:1px solid var(--bd); border-radius:0 10px 10px 10px; padding:12px; overflow:auto; }
+  table { border-collapse:collapse; width:100%; font-size:12.5px; }
+  th,td { border:1px solid #e4e7ec; padding:6px 8px; text-align:right; white-space:nowrap; }
+  th { background:var(--hd); color:#fff; position:sticky; top:0; font-weight:600; }
+  td.l,th.l { text-align:left; }
+  tr:nth-child(even) td { background:#fafbfc; }
+  tfoot td { font-weight:700; background:#eef2f7 !important; }
+  .muted { color:#98a2b3; font-style:italic; padding:20px; text-align:center; }
+</style>
+</head>
+<body>
+<h1>📊 GSTR-2B Summary Maker</h1>
+<div class="sub">Upload one or more GSTR-2B Excel files downloaded from the GST portal. All sections parsed; party-wise summary + combined Excel export.</div>
+
+<div class="controls">
+  <input type="file" id="fileInput" multiple accept=".xlsx,.xls">
+  <button id="goBtn" onclick="run()">Process</button>
+  <button id="dlBtn" class="sec" onclick="downloadExcel()" disabled>⬇ Download Combined Excel</button>
+</div>
+<div id="status"></div>
+<div class="cards" id="cards"></div>
+<div class="tabs" id="tabs"></div>
+<div class="panel" id="panel"><div class="muted">No data yet — upload files and click Process.</div></div>
+
+<script>
+// ---- Sheet config. Each section maps to canonical fields by matching header text. ----
+// "amend" sheets carry original cols on the left; we read the Revised block.
+const SECTIONS = [
+  {sheet:"B2B",            label:"B2B"},
+  {sheet:"B2BA",           label:"B2BA", amend:true},
+  {sheet:"B2B-CDNR",       label:"CDNR"},
+  {sheet:"B2B-CDNRA",      label:"CDNRA", amend:true},
+  {sheet:"ECO",            label:"ECO"},
+  {sheet:"ECOA",           label:"ECOA", amend:true},
+  {sheet:"ISD",            label:"ISD"},
+  {sheet:"ISDA",           label:"ISDA", amend:true},
+  {sheet:"B2B (ITC Reversal)",  label:"B2B-Rev"},
+  {sheet:"B2BA (ITC Reversal)", label:"B2BA-Rev", amend:true},
+  {sheet:"B2B-DNR",        label:"DNR"},
+  {sheet:"B2B-DNRA",       label:"DNRA", amend:true},
+];
+
+const norm = s => String(s==null?"":s).replace(/\s+/g," ").trim().toLowerCase();
+const N = v => { const n = parseFloat(String(v==null?"":v).replace(/,/g,"")); return isFinite(n)?n:0; };
+
+// Build a header lookup: for each column index, the combined text of rows 5+6 (or any two header rows).
+function buildHeaders(rows, hdrTop, hdrBot){
+  const top = rows[hdrTop]||[], bot = rows[hdrBot]||[], n = Math.max(top.length, bot.length);
+  const heads = [];
+  for(let c=0;c<n;c++){
+    const t = norm(top[c]), b = norm(bot[c]);
+    heads.push((t+" "+b).trim());
+  }
+  return heads;
+}
+
+// Find the column whose header contains ALL given keyword groups (each group = array of alternatives).
+function findCol(heads, ...groups){
+  for(let c=0;c<heads.length;c++){
+    const h = heads[c];
+    if(groups.every(g => g.some(k => h.includes(k)))) return c;
+  }
+  return -1;
+}
+
+// Locate the two header rows + data start by scanning for "gstin"/"icegate"/"taxable".
+function locate(rows){
+  for(let r=0;r<Math.min(rows.length,12);r++){
+    const joined = (rows[r]||[]).map(norm).join("|");
+    if(joined.includes("gstin") || joined.includes("note number") || joined.includes("document number")){
+      // header top = r, bottom = r+1, data starts r+2 (GST portal pattern)
+      return {top:r, bot:r+1, data:r+2};
+    }
+  }
+  return null;
+}
+
+function parseSheet(rows, cfg){
+  const loc = locate(rows);
+  if(!loc) return [];
+  const heads = buildHeaders(rows, loc.top, loc.bot);
+
+  // Column resolution (label-based, tolerant of section differences)
+  const cGstin  = findCol(heads, ["gstin"]);
+  const cName   = findCol(heads, ["trade","legal name"]);
+  const cDocNo  = findCol(heads, ["invoice number","note number","document number"]);
+  const cDocDt  = findCol(heads, ["invoice date","note date","document date","date"]);
+  const cTax    = findCol(heads, ["taxable value","taxable val"]);
+  const cIgst   = findCol(heads, ["integrated tax"]);
+  const cCgst   = findCol(heads, ["central tax"]);
+  const cSgst   = findCol(heads, ["state/ut tax","state tax"]);
+  const cCess   = findCol(heads, ["cess"]);
+  const cVal    = findCol(heads, ["invoice value","note value","document value"]);
+  const cType   = findCol(heads, ["invoice type","note type","document type"]);
+
+  const out = [];
+  for(let r=loc.data;r<rows.length;r++){
+    const row = rows[r]||[];
+    if(row.every(x => x==null || String(x).trim()==="")) continue;
+    const gstin = cGstin>=0 ? String(row[cGstin]||"").trim() : "";
+    let taxable = cTax>=0 ? N(row[cTax]) : 0;
+    let igst=N(row[cIgst]), cgst=N(row[cCgst]), sgst=N(row[cSgst]), cess=N(row[cCess]);
+    let val = cVal>=0 ? N(row[cVal]) : 0;
+    const typeStr = cType>=0 ? String(row[cType]||"").trim() : "";
+    // Credit Note => subtract (taxable + tax + value), Debit Note => add (positive, default)
+    const t = norm(typeStr);
+    const sign = t.includes("credit") ? -1 : 1;
+    taxable*=sign; igst*=sign; cgst*=sign; sgst*=sign; cess*=sign; val*=sign;
+    const gst = igst+cgst+sgst+cess;
+    // skip fully empty value rows
+    if(!gstin && !taxable && !gst && !val && !(cDocNo>=0 && row[cDocNo])) continue;
+    out.push({
+      section: cfg.label,
+      gstin: gstin || "—",
+      name: cName>=0 ? String(row[cName]||"").trim() : "",
+      doc: cDocNo>=0 ? String(row[cDocNo]||"").trim() : "",
+      date: cDocDt>=0 ? String(row[cDocDt]||"").trim() : "",
+      type: typeStr,
+      taxable, igst, cgst, sgst, cess, gst, val
+    });
+  }
+  return out;
+}
+
+let ALL = [];   // all invoice rows
+let bySection = {};
+
+async function run(){
+  const files = document.getElementById('fileInput').files;
+  const status = document.getElementById('status');
+  if(!files.length){ status.textContent="⚠ Please select at least one .xlsx file."; return; }
+  document.getElementById('goBtn').disabled = true;
+  status.textContent = "Processing…";
+  ALL = []; bySection = {};
+  let log = [];
+
+  for(const file of files){
+    try{
+      const buf = await file.arrayBuffer();
+      const wb = XLSX.read(buf, {type:"array"});
+      let fileCount = 0;
+      for(const cfg of SECTIONS){
+        if(!wb.SheetNames.includes(cfg.sheet)) continue;
+        const rows = XLSX.utils.sheet_to_json(wb.Sheets[cfg.sheet], {header:1, defval:null, raw:false});
+        const recs = parseSheet(rows, cfg);
+        recs.forEach(rec => { rec.file = file.name; ALL.push(rec); });
+        if(recs.length){ bySection[cfg.label] = (bySection[cfg.label]||[]).concat(recs); fileCount += recs.length; }
+      }
+      log.push(`✓ ${file.name}: ${fileCount} rows`);
+    }catch(e){
+      log.push(`✗ ${file.name}: ${e.message}`);
+    }
+  }
+  status.textContent = log.join("\n");
+  render();
+  document.getElementById('goBtn').disabled = false;
+  document.getElementById('dlBtn').disabled = ALL.length===0;
+}
+
+function fmt(n){ return n.toLocaleString('en-IN',{minimumFractionDigits:2, maximumFractionDigits:2}); }
+
+function partySummary(){
+  const m = {};
+  for(const r of ALL){
+    const k = r.gstin + "|" + (r.name||"");
+    if(!m[k]) m[k] = {gstin:r.gstin, name:r.name, taxable:0, igst:0, cgst:0, sgst:0, cess:0, gst:0, count:0};
+    const o = m[k]; o.taxable+=r.taxable; o.igst+=r.igst; o.cgst+=r.cgst; o.sgst+=r.sgst; o.cess+=r.cess; o.gst+=r.gst; o.count++;
+  }
+  return Object.values(m).sort((a,b)=>b.taxable-a.taxable);
+}
+
+let activeTab = "Summary";
+function render(){
+  const tabs = document.getElementById('tabs');
+  const cards = document.getElementById('cards');
+  if(!ALL.length){ tabs.innerHTML=""; cards.innerHTML=""; document.getElementById('panel').innerHTML='<div class="muted">No rows found.</div>'; return; }
+
+  const tTax = ALL.reduce((s,r)=>s+r.taxable,0);
+  const tGst = ALL.reduce((s,r)=>s+r.gst,0);
+  const parties = partySummary();
+  cards.innerHTML =
+    card("Total Records", ALL.length.toLocaleString('en-IN')) +
+    card("Suppliers/Parties", parties.length) +
+    card("Total Taxable (₹)", fmt(tTax)) +
+    card("Total GST (₹)", fmt(tGst));
+
+  const names = ["Summary", ...Object.keys(bySection)];
+  if(!names.includes(activeTab)) activeTab = "Summary";
+  tabs.innerHTML = names.map(n =>
+    `<div class="tab ${n===activeTab?'active':''}" onclick="setTab('${n.replace(/'/g,"\\'")}')">${n}${n!=='Summary'?` (${bySection[n].length})`:''}</div>`
+  ).join("");
+  renderPanel();
+}
+function card(k,v){ return `<div class="card"><div class="k">${k}</div><div class="v">${v}</div></div>`; }
+function setTab(n){ activeTab=n; render(); }
+
+function renderPanel(){
+  const p = document.getElementById('panel');
+  if(activeTab==="Summary"){
+    const rows = partySummary();
+    let h = `<table><thead><tr>
+      <th class="l">GSTIN</th><th class="l">Trade/Legal Name</th><th>Records</th>
+      <th>Taxable</th><th>IGST</th><th>CGST</th><th>SGST</th><th>Cess</th><th>Total GST</th></tr></thead><tbody>`;
+    for(const r of rows){
+      h += `<tr><td class="l">${r.gstin}</td><td class="l">${r.name||""}</td><td>${r.count}</td>
+        <td>${fmt(r.taxable)}</td><td>${fmt(r.igst)}</td><td>${fmt(r.cgst)}</td><td>${fmt(r.sgst)}</td><td>${fmt(r.cess)}</td><td>${fmt(r.gst)}</td></tr>`;
+    }
+    const t = rows.reduce((a,r)=>({tx:a.tx+r.taxable,i:a.i+r.igst,c:a.c+r.cgst,s:a.s+r.sgst,ce:a.ce+r.cess,g:a.g+r.gst}),{tx:0,i:0,c:0,s:0,ce:0,g:0});
+    h += `</tbody><tfoot><tr><td class="l" colspan="2">TOTAL</td><td>${rows.reduce((a,r)=>a+r.count,0)}</td>
+      <td>${fmt(t.tx)}</td><td>${fmt(t.i)}</td><td>${fmt(t.c)}</td><td>${fmt(t.s)}</td><td>${fmt(t.ce)}</td><td>${fmt(t.g)}</td></tr></tfoot></table>`;
+    p.innerHTML = h;
+  } else {
+    const rows = bySection[activeTab]||[];
+    let h = `<table><thead><tr>
+      <th class="l">GSTIN</th><th class="l">Name</th><th class="l">Doc No</th><th class="l">Date</th><th class="l">Type</th>
+      <th>Taxable</th><th>IGST</th><th>CGST</th><th>SGST</th><th>Cess</th><th>Total GST</th><th>Doc Value</th></tr></thead><tbody>`;
+    for(const r of rows){
+      h += `<tr><td class="l">${r.gstin}</td><td class="l">${r.name||""}</td><td class="l">${r.doc||""}</td>
+        <td class="l">${r.date||""}</td><td class="l">${r.type||""}</td>
+        <td>${fmt(r.taxable)}</td><td>${fmt(r.igst)}</td><td>${fmt(r.cgst)}</td><td>${fmt(r.sgst)}</td><td>${fmt(r.cess)}</td><td>${fmt(r.gst)}</td><td>${fmt(r.val)}</td></tr>`;
+    }
+    const t = rows.reduce((a,r)=>({tx:a.tx+r.taxable,g:a.g+r.gst,v:a.v+r.val}),{tx:0,g:0,v:0});
+    h += `</tbody><tfoot><tr><td class="l" colspan="5">TOTAL (${rows.length})</td>
+      <td>${fmt(t.tx)}</td><td colspan="4"></td><td>${fmt(t.g)}</td><td>${fmt(t.v)}</td></tr></tfoot></table>`;
+    p.innerHTML = h;
+  }
+}
+
+function downloadExcel(){
+  if(!ALL.length) return;
+  const wb = XLSX.utils.book_new();
+  // Summary sheet
+  const sum = partySummary().map(r=>({
+    GSTIN:r.gstin, "Trade/Legal Name":r.name, Records:r.count,
+    Taxable:r.taxable, IGST:r.igst, CGST:r.cgst, SGST:r.sgst, Cess:r.cess, "Total GST":r.gst
+  }));
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(sum), "Party Summary");
+  // All invoices
+  const all = ALL.map(r=>({
+    Section:r.section, File:r.file, GSTIN:r.gstin, Name:r.name, "Doc No":r.doc, Date:r.date, Type:r.type,
+    Taxable:r.taxable, IGST:r.igst, CGST:r.cgst, SGST:r.sgst, Cess:r.cess, "Total GST":r.gst, "Doc Value":r.val
+  }));
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(all), "All Records");
+  // Per-section sheets
+  for(const sec in bySection){
+    const data = bySection[sec].map(r=>({
+      GSTIN:r.gstin, Name:r.name, "Doc No":r.doc, Date:r.date, Type:r.type,
+      Taxable:r.taxable, IGST:r.igst, CGST:r.cgst, SGST:r.sgst, Cess:r.cess, "Total GST":r.gst, "Doc Value":r.val
+    }));
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(data), sec.substring(0,31));
+  }
+  XLSX.writeFile(wb, "GSTR2B_Combined_Analysis.xlsx");
+}
+</script>
+</body>
+</html>

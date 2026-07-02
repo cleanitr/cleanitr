@@ -1,0 +1,21 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["ITR", "GST", "Notices", "TDS", "MCA", "General"] }
+      - { label: "Read time (e.g. 5 min read)", name: "readtime", widget: "string", default: "5 min read" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Cover Image (optional)", name: "image", widget: "image", required: false }
+      - { label: "Short summary", name: "summary", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }

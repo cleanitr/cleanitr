@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free EMI calculator — compute your monthly loan instalment, total interest and total repayment for home, car or personal loans.">
+<title>EMI Calculator — CleanITR</title>
+<link rel="canonical" href="https://cleanitr.netlify.app/tools/emi-calculator.html">
+<meta property="og:title" content="EMI Calculator — CleanITR">
+<meta property="og:description" content="Free EMI calculator — compute your monthly loan instalment, total interest and total repayment for home, car or personal loans.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/_calc.css">
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="/" class="brand">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <div class="brand-text"><div class="name">Clean<span>ITR</span></div><div class="sub">Tax Platform by Chartered Accountants</div></div>
+    </a>
+    <a href="/tools.html" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> All tools</a>
+  </div>
+</header>
+<main class="page">
+  <div class="wrap">
+    <span class="eyebrow">Free tool</span>
+    <h1>EMI Calculator</h1>
+    <p class="sub">Enter your loan amount, interest rate and tenure to get your exact monthly EMI with a clear interest breakup.</p>
+    <div class="card">
+      <div class="field"><label for="p">Loan amount (₹)</label><input type="number" id="p" placeholder="e.g. 2500000" min="0"></div>
+      <div class="row">
+        <div class="field"><label for="r">Interest rate (% per annum)</label><input type="number" id="r" placeholder="e.g. 8.5" step="0.05" min="0"></div>
+        <div class="field"><label for="n">Tenure (years)</label><input type="number" id="n" placeholder="e.g. 20" min="0"></div>
+      </div>
+      <button class="btn" onclick="calc()">Calculate EMI</button>
+      <div class="result" id="res"></div>
+    </div>
+    <div class="cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Want a CA to verify and file for you? Email <a href="mailto:info.cleanitr@gmail.com">info.cleanitr@gmail.com</a> or <a href="https://wa.me/917838808704" target="_blank" rel="noopener">WhatsApp us</a>.</span>
+    </div>
+    <p class="note">EMI is computed on monthly reducing balance: EMI = P × r × (1+r)ⁿ ÷ ((1+r)ⁿ − 1), where r is the monthly rate and n is the number of months.</p>
+  </div>
+</main>
+<footer>© 2026 Clean ITR · Tax Platform by Chartered Accountants.</footer>
+<script>
+const inr=n=>'₹'+Math.round(n).toLocaleString('en-IN');
+function calc(){
+  const P=+document.getElementById('p').value||0;
+  const annual=+document.getElementById('r').value||0;
+  const yrs=+document.getElementById('n').value||0;
+  const r=annual/1200,n=yrs*12;
+  if(!P||!n){return}
+  const emi=r===0?P/n:P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const total=emi*n,interest=total-P;
+  const el=document.getElementById('res');
+  el.innerHTML=`
+    <div class="r-row"><span>Monthly EMI</span><b class="r-big">${inr(emi)}</b></div>
+    <div class="r-row"><span>Principal amount</span><b>${inr(P)}</b></div>
+    <div class="r-row"><span>Total interest payable</span><b>${inr(interest)}</b></div>
+    <div class="r-row"><span>Total repayment (${n} months)</span><b>${inr(total)}</b></div>`;
+  el.classList.add('show');
+}
+</script>
+</body>
+</html>

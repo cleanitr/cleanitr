@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free HRA exemption calculator under Section 10(13A) — find exactly how much of your house rent allowance is tax-free.">
+<title>HRA Exemption Calculator — CleanITR</title>
+<link rel="canonical" href="https://cleanitr.netlify.app/tools/hra-calculator.html">
+<meta property="og:title" content="HRA Exemption Calculator — CleanITR">
+<meta property="og:description" content="Free HRA exemption calculator under Section 10(13A) — find exactly how much of your house rent allowance is tax-free.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/_calc.css">
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="/" class="brand">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <div class="brand-text"><div class="name">Clean<span>ITR</span></div><div class="sub">Tax Platform by Chartered Accountants</div></div>
+    </a>
+    <a href="/tools.html" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> All tools</a>
+  </div>
+</header>
+<main class="page">
+  <div class="wrap">
+    <span class="eyebrow">Free tool</span>
+    <h1>HRA Exemption Calculator</h1>
+    <p class="sub">Under Section 10(13A), the exempt HRA is the least of three amounts. Enter your annual figures and we'll show the full working.</p>
+    <div class="card">
+      <div class="row">
+        <div class="field"><label for="basic">Basic salary + DA (annual ₹)</label><input type="number" id="basic" placeholder="e.g. 600000" min="0"></div>
+        <div class="field"><label for="recv">HRA received (annual ₹)</label><input type="number" id="recv" placeholder="e.g. 240000" min="0"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="rent">Rent paid (annual ₹)</label><input type="number" id="rent" placeholder="e.g. 300000" min="0"></div>
+        <div class="field"><label for="city">City type</label><select id="city"><option value="50">Metro (Delhi/Mumbai/Kolkata/Chennai)</option><option value="40">Non-metro</option></select></div>
+      </div>
+      <button class="btn" onclick="calc()">Calculate exemption</button>
+      <div class="result" id="res"></div>
+    </div>
+    <div class="cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Want a CA to verify and file for you? Email <a href="mailto:info.cleanitr@gmail.com">info.cleanitr@gmail.com</a> or <a href="https://wa.me/917838808704" target="_blank" rel="noopener">WhatsApp us</a>.</span>
+    </div>
+    <p class="note">HRA exemption is available only under the old tax regime. Basic salary here means basic pay + dearness allowance (if it forms part of retirement benefits). Metro cities: Delhi, Mumbai, Kolkata, Chennai.</p>
+  </div>
+</main>
+<footer>© 2026 Clean ITR · Tax Platform by Chartered Accountants.</footer>
+<script>
+const inr=n=>'₹'+Math.round(n).toLocaleString('en-IN');
+function calc(){
+  const basic=+document.getElementById('basic').value||0;
+  const recv=+document.getElementById('recv').value||0;
+  const rent=+document.getElementById('rent').value||0;
+  const pct=+document.getElementById('city').value;
+  const a=recv,b=basic*pct/100,c=Math.max(0,rent-basic*.10);
+  const exempt=Math.max(0,Math.min(a,b,c));
+  const taxable=Math.max(0,recv-exempt);
+  const el=document.getElementById('res');
+  el.innerHTML=`
+    <div class="r-row"><span>1. Actual HRA received</span><b>${inr(a)}</b></div>
+    <div class="r-row"><span>2. ${pct}% of basic salary</span><b>${inr(b)}</b></div>
+    <div class="r-row"><span>3. Rent paid − 10% of basic</span><b>${inr(c)}</b></div>
+    <div class="r-row"><span>Exempt HRA (least of the three)</span><b class="r-big">${inr(exempt)}</b></div>
+    <div class="r-row"><span>Taxable HRA</span><b>${inr(taxable)}</b></div>`;
+  el.classList.add('show');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free GST calculator — add or remove GST at 0.25%, 3%, 5%, 12%, 18% or 28%. Instant CGST/SGST split.">
+<title>GST Calculator — CleanITR</title>
+<link rel="canonical" href="https://cleanitr.netlify.app/tools/gst-calculator.html">
+<meta property="og:title" content="GST Calculator — CleanITR">
+<meta property="og:description" content="Free GST calculator — add or remove GST at 0.25%, 3%, 5%, 12%, 18% or 28%. Instant CGST/SGST split.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/_calc.css">
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="/" class="brand">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <div class="brand-text"><div class="name">Clean<span>ITR</span></div><div class="sub">Tax Platform by Chartered Accountants</div></div>
+    </a>
+    <a href="/tools.html" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> All tools</a>
+  </div>
+</header>
+<main class="page">
+  <div class="wrap">
+    <span class="eyebrow">Free tool</span>
+    <h1>GST Calculator</h1>
+    <p class="sub">Add GST to a base amount (exclusive) or extract GST from a total (inclusive) — with an automatic CGST + SGST split at every slab rate.</p>
+    <div class="card">
+      <div class="field"><label for="amt">Amount (₹)</label><input type="number" id="amt" placeholder="e.g. 10000" min="0"></div>
+      <div class="row">
+        <div class="field"><label for="rate">GST rate (%)</label><select id="rate"><option>0.25</option><option>3</option><option>5</option><option>12</option><option selected>18</option><option>28</option></select></div>
+        <div class="field"><label for="type">Calculation type</label><select id="type"><option value="add">Add GST (amount is exclusive)</option><option value="remove">Remove GST (amount is inclusive)</option></select></div>
+      </div>
+      <button class="btn" onclick="calc()">Calculate GST</button>
+      <div class="result" id="res"></div>
+    </div>
+    <div class="cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Want a CA to verify and file for you? Email <a href="mailto:info.cleanitr@gmail.com">info.cleanitr@gmail.com</a> or <a href="https://wa.me/917838808704" target="_blank" rel="noopener">WhatsApp us</a>.</span>
+    </div>
+    <p class="note">For intra-state supplies GST splits equally into CGST and SGST; for inter-state supplies the full amount is IGST.</p>
+  </div>
+</main>
+<footer>© 2026 Clean ITR · Tax Platform by Chartered Accountants.</footer>
+<script>
+const inr=n=>'₹'+Math.round(n).toLocaleString('en-IN');
+function calc(){
+  const amt=+document.getElementById('amt').value||0;
+  const rate=+document.getElementById('rate').value||0;
+  const type=document.getElementById('type').value;
+  let base,gst,total;
+  if(type==='add'){base=amt;gst=amt*rate/100;total=base+gst}
+  else{total=amt;base=amt/(1+rate/100);gst=total-base}
+  const el=document.getElementById('res');
+  el.innerHTML=`
+    <div class="r-row"><span>Base amount (taxable value)</span><b>${inr(base)}</b></div>
+    <div class="r-row"><span>GST @ ${rate}%</span><b>${inr(gst)}</b></div>
+    <div class="r-row"><span>CGST ${rate/2}% + SGST ${rate/2}%</span><b>${inr(gst/2)} + ${inr(gst/2)}</b></div>
+    <div class="r-row"><span>Total amount</span><b class="r-big">${inr(total)}</b></div>`;
+  el.classList.add('show');
+}
+</script>
+</body>
+</html>

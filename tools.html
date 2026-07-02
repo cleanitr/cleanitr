@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free tax tools by CleanITR — GSTR-2B & GSTR-3B summary makers, income tax calculator (FY 2025-26), GST, HRA, TDS and EMI calculators. Built by Chartered Accountants.">
+<title>Free Tax Tools & Calculators — CleanITR</title>
+<link rel="canonical" href="https://cleanitr.netlify.app/tools.html">
+<meta property="og:title" content="Free Tax Tools & Calculators — CleanITR">
+<meta property="og:description" content="GSTR-2B & 3B summary makers, income tax, GST, HRA, TDS and EMI calculators — free, built by CAs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/_calc.css">
+<style>
+.wrap{max-width:1180px}
+.hero-t{padding:56px 0 14px;text-align:center}
+.hero-t h1{font-size:clamp(1.9rem,4.5vw,2.7rem);margin:10px 0 12px}
+.hero-t .sub{margin:0 auto 10px}
+.tsec{padding:34px 0 8px}
+.tsec-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.tsec-head .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex-shrink:0}
+.tsec-head .ic.g{background:var(--teal-light);color:var(--teal)}
+.tsec-head .ic.o{background:var(--gold-light);color:var(--gold)}
+.tsec-head .ic svg{width:23px;height:23px}
+.tsec-head h2{font-size:1.35rem}
+.tsec-head p{font-size:.88rem;color:var(--ink-soft)}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:940px){.tgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.tgrid{grid-template-columns:1fr}}
+.tcard{position:relative;display:block;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);padding:26px;box-shadow:var(--shadow);transition:.22s}
+.tcard:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(15,42,46,.12);border-color:var(--teal)}
+.tcard .tic{width:44px;height:44px;border-radius:12px;background:var(--teal-light);color:var(--teal);display:grid;place-items:center;margin-bottom:15px}
+.tcard .tic svg{width:22px;height:22px}
+.tcard h3{font-size:1.02rem;margin-bottom:7px}
+.tcard p{font-size:.87rem;color:var(--ink-soft);margin-bottom:14px}
+.tcard .go{font-size:.85rem;font-weight:700;color:var(--teal);display:inline-flex;align-items:center;gap:6px}
+.tcard .go svg{width:15px;height:15px;transition:.2s}
+.tcard:hover .go svg{transform:translateX(3px)}
+.tbadge{position:absolute;top:16px;right:16px;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--gold-light);color:var(--gold);padding:4px 9px;border-radius:99px}
+.tbadge.soon{background:var(--paper);color:var(--ink-soft);border:1px solid var(--line)}
+.soon-card{opacity:.72;pointer-events:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="/" class="brand">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <div class="brand-text"><div class="name">Clean<span>ITR</span></div><div class="sub">Tax Platform by Chartered Accountants</div></div>
+    </a>
+    <a href="/" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Back to home</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero-t">
+    <span class="eyebrow">Free &amp; built by CAs</span>
+    <h1>Tax tools that do the math for you.</h1>
+    <p class="sub">Every tool here is free, works in your browser, and never uploads your data anywhere. Use them as often as you like — and when you're ready to file, our CAs are one email away.</p>
+  </div>
+
+  <!-- GST TOOLS -->
+  <section class="tsec">
+    <div class="wrap">
+      <div class="tsec-head">
+        <div class="ic g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+        <div><h2>GST Tools</h2><p>Summaries and calculations for GST returns and invoicing.</p></div>
+      </div>
+      <div class="tgrid">
+        <a class="tcard" href="/tools/gstr2b-summary-maker.html">
+          <span class="tbadge">CA Power Tool</span>
+          <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="7"/><rect x="12" y="7" width="3" height="11"/><rect x="17" y="13" width="3" height="5"/></svg></div>
+          <h3>GSTR-2B Summary Maker</h3>
+          <p>Upload GSTR-2B Excel files from the GST portal and get an instant party-wise ITC summary with a combined Excel export.</p>
+          <span class="go">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="tcard" href="/tools/gstr3b-summary-maker.html">
+          <span class="tbadge">CA Power Tool</span>
+          <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
+          <h3>GSTR-3B Summary Maker</h3>
+          <p>Upload GSTR-3B PDFs and generate a clean year-wise summary — outward supplies, ITC, RCM, late fees and closing balance.</p>
+          <span class="go">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="tcard" href="/tools/gst-calculator.html">
+          <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8"/><rect x="14" y="6" width="3" height="12"/></svg></div>
+          <h3>GST Calculator</h3>
+          <p>Add or remove GST at any slab rate — inclusive or exclusive — with an automatic CGST + SGST split.</p>
+          <span class="go">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INCOME TAX TOOLS -->
+  <section class="tsec">
+    <div class="wrap">
+      <div class="tsec-head">
+        <div class="ic g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h8M8 14h2M8 18h2M14 14h2M14 18h2"/></svg></div>
+        <div><h2>Income Tax Tools</h2><p>Regime comparison, exemptions and deductions — updated for FY 2025-26.</p></div>
+      </div>
+      <div class="tgrid">
+        <a class="tcard" href="/tools/income-tax-calculator.html">
+          <span class="tbadge">FY 2025-26</span>
+          <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h8M8 14h2M8 18h2M14 14h2M14 18h2"/></svg></div>
+          <h3>Income Tax Calculator</h3>
+          <p>Compare old vs new regime with the latest slabs, standard deduction and 87A rebate — see which saves you more.</p>
+          <span class="go">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="tcard" href="/tools/hra-calculator.html">
+          <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>HRA Exemption Calculator</h3>
+          <p>Find exactly how much of your house rent allowance is tax-exempt under Section 10(13A), with the full working shown.</p>
+          <span class="go">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="tcard" href="/tools/tds-calculator.html">
+          <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-5"/></svg></div>
+          <h3>TDS Calculator</h3>
+          <p>Estimate TDS on rent, contracts, professional fees, commission and interest — with sections, rates and thresholds.</p>
+          <span class="go">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OTHER TOOLS -->
+  <section class="tsec" style="padding-bottom:60px">
+    <div class="wrap">
+      <div class="tsec-head">
+        <div class="ic o"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <div><h2>Other Tools</h2><p>Everyday finance calculators for loans and planning.</p></div>
+      </div>
+      <div class="tgrid">
+        <a class="tcard" href="/tools/emi-calculator.html">
+          <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <h3>EMI Calculator</h3>
+          <p>Plan home, car or personal loan repayments with a clear monthly EMI and total interest breakup.</p>
+          <span class="go">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <div class="tcard soon-card">
+          <span class="tbadge soon">Coming soon</span>
+          <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v2M12 16v2"/></svg></div>
+          <h3>Capital Gains Tool</h3>
+          <p>Calculate short &amp; long-term capital gains on shares, property and mutual funds.</p>
+          <span class="go">Coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" style="max-width:860px;padding-bottom:70px">
+    <div class="cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Tools give you a number — a CA gives you certainty. Email your documents to <a href="mailto:info.cleanitr@gmail.com">info.cleanitr@gmail.com</a> and we'll take it from there.</span>
+    </div>
+  </div>
+</main>
+<footer>© 2026 Clean ITR · Tax Platform by Chartered Accountants.</footer>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tax made simple — practical ITR, GST, TDS and compliance guides written by the Chartered Accountants at CleanITR.">
+<title>Blog — Tax Guides by CAs | CleanITR</title>
+<link rel="canonical" href="https://cleanitr.netlify.app/blog.html">
+<meta property="og:title" content="CleanITR Blog — Tax Guides by CAs">
+<meta property="og:description" content="Practical ITR, GST, TDS and compliance guides written by Chartered Accountants.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/_calc.css">
+<style>
+.wrap{max-width:1180px}
+.hero-b{padding:56px 0 34px;text-align:center}
+.hero-b h1{font-size:clamp(1.9rem,4.5vw,2.7rem);margin:10px 0 12px}
+.hero-b .sub{margin:0 auto}
+/* filter chips */
+.chips{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin:26px 0 6px}
+.chip{font-size:.82rem;font-weight:600;padding:8px 16px;border-radius:99px;border:1.5px solid var(--line);background:var(--paper-2);cursor:pointer;color:var(--ink-soft);transition:.18s}
+.chip:hover{border-color:var(--teal);color:var(--teal)}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff}
+/* grid */
+.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:26px 0 70px}
+@media(max-width:940px){.bgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.bgrid{grid-template-columns:1fr}}
+.post{display:flex;flex-direction:column;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:.22s;cursor:pointer}
+.post:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(15,42,46,.12)}
+.pimg{position:relative;height:180px;background:linear-gradient(135deg,var(--teal-light),var(--gold-light));display:grid;place-items:center;color:var(--teal)}
+.pimg svg{width:44px;height:44px;opacity:.55}
+.pimg img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.pcat{position:absolute;top:13px;left:13px;z-index:2;font-size:.64rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.92);color:var(--teal);padding:5px 10px;border-radius:99px}
+.pbody{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pdate{font-size:.76rem;color:var(--ink-soft);font-weight:500}
+.pbody h3{font-size:1.02rem;line-height:1.35}
+.pbody p{font-size:.86rem;color:var(--ink-soft);flex:1}
+.pread{font-size:.84rem;font-weight:700;color:var(--teal);display:inline-flex;align-items:center;gap:6px}
+.pread svg{width:15px;height:15px}
+/* article view */
+.article{display:none;padding:40px 0 80px}
+.article.show{display:block}
+.a-wrap{max-width:760px;margin:0 auto;padding:0 20px}
+.a-back{display:inline-flex;align-items:center;gap:7px;font-size:.88rem;font-weight:700;color:var(--teal);margin-bottom:26px;padding:8px 14px;border-radius:9px;cursor:pointer}
+.a-back:hover{background:var(--teal-light)}
+.a-back svg{width:15px;height:15px}
+.acat{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--teal-light);color:var(--teal);padding:6px 13px;border-radius:99px;margin-bottom:16px}
+.a-wrap h1{font-size:clamp(1.6rem,4vw,2.35rem);margin-bottom:14px}
+.a-meta{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--ink-soft);margin-bottom:26px}
+.a-meta .dot{width:4px;height:4px;border-radius:50%;background:var(--gold)}
+/* cover image — responsive, adapts to any aspect ratio */
+.a-cover{margin:0 0 32px;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.a-cover img{display:block;width:100%;height:auto;max-height:480px;object-fit:cover}
+.a-body{font-size:1.02rem}
+.a-body h2,.a-body h3{margin:30px 0 12px}
+.a-body h2{font-size:1.4rem}
+.a-body h3{font-size:1.15rem}
+.a-body p{margin-bottom:16px}
+.a-body ul,.a-body ol{margin:0 0 16px 24px}
+.a-body li{margin-bottom:7px}
+.a-body img{max-width:100%;height:auto;border-radius:12px;margin:20px 0;box-shadow:var(--shadow)}
+.a-body table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.92rem}
+.a-body th,.a-body td{border:1px solid var(--line);padding:10px 13px;text-align:left}
+.a-body th{background:var(--teal-light);font-weight:700}
+.a-body blockquote{border-left:3px solid var(--gold);padding:6px 18px;margin:18px 0;color:var(--ink-soft);font-style:italic}
+.a-body code{background:var(--teal-light);padding:2px 7px;border-radius:6px;font-size:.88em}
+.a-cta{margin-top:44px;padding:28px;background:linear-gradient(135deg,var(--teal),var(--teal-deep));border-radius:var(--r);color:#fff;text-align:center}
+.a-cta h3{margin-bottom:8px;font-size:1.25rem}
+.a-cta p{opacity:.9;font-size:.92rem;margin-bottom:18px}
+.a-cta a{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--teal-deep);font-weight:700;padding:12px 24px;border-radius:11px;font-size:.94rem}
+.msg{grid-column:1/-1;text-align:center;color:var(--ink-soft);padding:40px 0}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="/" class="brand">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <div class="brand-text"><div class="name">Clean<span>ITR</span></div><div class="sub">Tax Platform by Chartered Accountants</div></div>
+    </a>
+    <a href="/" class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Back to home</a>
+  </div>
+</header>
+
+<!-- LISTING VIEW -->
+<main id="listView">
+  <div class="wrap hero-b">
+    <span class="eyebrow">Learn with us</span>
+    <h1>Tax made simple — straight from our CAs.</h1>
+    <p class="sub">Practical guides on ITR, GST, TDS, notices and compliance — written in plain language you can actually follow.</p>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="wrap">
+    <div class="bgrid" id="grid"><p class="msg">Loading articles…</p></div>
+  </div>
+</main>
+
+<!-- ARTICLE VIEW -->
+<article class="article" id="articleView">
+  <div class="a-wrap">
+    <span class="a-back" onclick="showList()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      All articles
+    </span>
+    <div id="articleBody"></div>
+    <div class="a-cta">
+      <h3>Want this handled by a real CA?</h3>
+      <p>Skip the guesswork. Share your documents and let our Chartered Accountants take care of it — reviewed, cross-checked and filed on time.</p>
+      <a href="mailto:info.cleanitr@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+        Email us your documents
+      </a>
+    </div>
+  </div>
+</article>
+
+<footer>© 2026 Clean ITR · Tax Platform by Chartered Accountants.</footer>
+
+<script>
+const catIcons={
+  ITR:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>',
+  GST:'<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>',
+  Notices:'<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>',
+  TDS:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
+  MCA:'<path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"/>',
+  General:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>'
+};
+let allPosts=[],bySlug={},activeCat='All';
+const grid=document.getElementById('grid');
+const listView=document.getElementById('listView');
+const articleView=document.getElementById('articleView');
+
+function fmtDate(iso){try{return new Date(iso).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}catch(e){return ''}}
+
+function renderChips(){
+  const cats=['All',...new Set(allPosts.map(p=>p.category))];
+  document.getElementById('chips').innerHTML=cats.map(c=>
+    `<button class="chip${c===activeCat?' on':''}" onclick="filterCat('${c}')">${c}</button>`).join('');
+}
+function filterCat(c){activeCat=c;renderChips();renderGrid()}
+
+function renderGrid(){
+  const posts=activeCat==='All'?allPosts:allPosts.filter(p=>p.category===activeCat);
+  if(!posts.length){grid.innerHTML='<p class="msg">No articles in this category yet — check back soon.</p>';return}
+  grid.innerHTML=posts.map(p=>{
+    const icon=catIcons[p.category]||catIcons.General;
+    const img=p.image
+      ?`<img src="${p.image}" alt="${p.title}" loading="lazy">`
+      :`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${icon}</svg>`;
+    const meta=[fmtDate(p.date),p.readtime].filter(Boolean).join(' · ');
+    return `<div class="post" onclick="openPost('${p.slug}')">
+      <div class="pimg"><span class="pcat">${p.category}</span>${img}</div>
+      <div class="pbody">
+        <span class="pdate">${meta}</span>
+        <h3>${p.title}</h3>
+        <p>${p.summary||''}</p>
+        <span class="pread">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openPost(slug,push=true){
+  const p=bySlug[slug];
+  if(!p)return;
+  const meta=[fmtDate(p.date),p.readtime].filter(Boolean).join(' · ');
+  // Cover image from the post — full width, height adapts automatically
+  const cover=p.image?`<figure class="a-cover"><img src="${p.image}" alt="${p.title}"></figure>`:'';
+  document.getElementById('articleBody').innerHTML=`
+    <span class="acat">${p.category}</span>
+    <h1>${p.title}</h1>
+    <div class="a-meta"><span>By Clean ITR Team</span><span class="dot"></span><span>${meta}</span></div>
+    ${cover}
+    <div class="a-body">${p.bodyHtml}</div>`;
+  listView.style.display='none';
+  articleView.classList.add('show');
+  document.title=p.title+' — CleanITR Blog';
+  window.scrollTo({top:0});
+  if(push)history.pushState({slug},'', '/blog.html?post='+encodeURIComponent(slug));
+}
+function showList(push=true){
+  articleView.classList.remove('show');
+  listView.style.display='';
+  document.title='Blog — Tax Guides by CAs | CleanITR';
+  if(push)history.pushState({},'','/blog.html');
+}
+window.addEventListener('popstate',()=>{
+  const slug=new URLSearchParams(location.search).get('post');
+  if(slug&&bySlug[slug])openPost(slug,false);else showList(false);
+});
+
+fetch('/posts.json?_='+Date.now()).then(r=>r.json()).then(posts=>{
+  allPosts=posts;
+  bySlug=Object.fromEntries(posts.map(p=>[p.slug,p]));
+  renderChips();
+  renderGrid();
+  const slug=new URLSearchParams(location.search).get('post');
+  if(slug&&bySlug[slug])openPost(slug,false);
+}).catch(err=>{
+  grid.innerHTML='<p class="msg">Unable to load articles right now.</p>';
+  console.error(err);
+});
+</script>
+</body>
+</html>
