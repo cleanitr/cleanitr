@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="CleanITR — Tax Platform by Chartered Accountants. File your ITR, GST returns, MCA forms & more with expert CA help across Delhi, Saharanpur & Yamunanagar.">
 <title>CleanITR — Tax Platform by Chartered Accountants | ITR, GST & Compliance</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230e7c66'/%3E%3Cpath d='M18 8l-7.5 8L6 12' stroke='%23fff' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="canonical" href="https://cleanitr.netlify.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CleanITR">
@@ -139,6 +140,33 @@ header{
 @media(prefers-reduced-motion:reduce){.row-ltr .testi-track,.row-rtl .testi-track{animation:none}}
 @media(max-width:560px){.testi-track .tcard{width:290px}}
 .testi-marquee + .testi-marquee{margin-top:22px}
+
+/* ===== DEADLINE COUNTDOWN ===== */
+.deadline{background:linear-gradient(90deg,var(--ink),#12363b);color:#fff;padding:13px 0}
+.deadline .wrap{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;text-align:center}
+.dl-lbl{font-size:.86rem;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.dl-lbl svg{width:16px;height:16px;color:var(--gold)}
+.dl-timer{display:flex;gap:8px}
+.dl-unit{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:9px;padding:5px 10px;min-width:52px;text-align:center}
+.dl-unit b{font-family:'Sora';font-size:1.02rem;display:block;line-height:1.1;font-variant-numeric:tabular-nums}
+.dl-unit span{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.dl-cta{font-size:.8rem;font-weight:700;background:var(--gold);color:#fff;padding:8px 16px;border-radius:9px;transition:.2s}
+.dl-cta:hover{background:#b57722;transform:translateY(-1px)}
+/* ===== TEAM ===== */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:920px;margin:0 auto}
+@media(max-width:880px){.team-grid{grid-template-columns:1fr;max-width:400px}}
+.tm{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;text-align:center;transition:.25s}
+.tm:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.tm-photo{position:relative;height:250px;background:linear-gradient(160deg,var(--teal-light),var(--gold-light));display:grid;place-items:center;overflow:hidden}
+.tm-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;transition:.4s}
+.tm:hover .tm-photo img{transform:scale(1.04)}
+.tm-fallback{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;display:grid;place-items:center;font-family:'Sora';font-weight:800;font-size:1.9rem;box-shadow:0 8px 24px rgba(14,124,102,.35)}
+.tm-body{padding:20px 18px 24px}
+.tm-body .tm-badge{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:var(--gold-light);padding:4px 11px;border-radius:99px;margin-bottom:10px}
+.tm-body h3{font-size:1.08rem;margin-bottom:4px}
+.tm-body .tm-role{font-size:.84rem;color:var(--ink-soft);display:flex;align-items:center;justify-content:center;gap:6px}
+.tm-body .tm-role svg{width:14px;height:14px;color:var(--teal)}
+
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
 .burger span{width:24px;height:2.5px;background:var(--ink);border-radius:2px;transition:.25s}
 .burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
@@ -684,6 +712,14 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
 @media(max-width:440px){.ql-grid{grid-template-columns:1fr}}
 </style>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What documents do I need to file my ITR?","acceptedAnswer":{"@type":"Answer","text":"For most salaried individuals: Form 16, bank statements, details of any other income, and proofs of tax-saving investments like 80C and 80D. Email what you have and we will guide you on the rest."}},
+{"@type":"Question","name":"How long does ITR filing take?","acceptedAnswer":{"@type":"Answer","text":"Once we have your documents, a straightforward return is usually reviewed and ready for approval within a couple of working days."}},
+{"@type":"Question","name":"Do I have to visit your office?","acceptedAnswer":{"@type":"Answer","text":"No. Everything can be done online over email or WhatsApp. In-person meetings are available at our Delhi, Saharanpur and Yamunanagar offices."}},
+{"@type":"Question","name":"What if I get a tax notice later?","acceptedAnswer":{"@type":"Answer","text":"Forward the notice to us and a Chartered Accountant will review it and draft the appropriate response. Notice handling is one of our core services."}}
+]}
+</script>
 </head>
 <body>
 
@@ -703,45 +739,45 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
       <ul class="nav-links" id="navLinks">
         <li><a href="#home">Home</a></li>
         <li class="has-drop">
-          <a href="#services" class="drop-trigger">Services
+          <a href="#contact" class="drop-trigger" data-svc="">Services
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="m6 9 6 6 6-6"/></svg>
           </a>
           <div class="mega-drop">
             <div class="md-col">
-              <a href="#services" class="md-head">Individual</a>
-              <a href="#services">Individual ITR Filing</a>
-              <a href="#services">Tax Planning</a>
-              <a href="#services">Notice Reply</a>
-              <a href="#services">Capital Gain</a>
+              <span class="md-head">Individual</span>
+              <a href="#contact" class="svc-link" data-svc="Individual ITR Filing">Individual ITR Filing</a>
+              <a href="#contact" class="svc-link" data-svc="Tax Planning">Tax Planning</a>
+              <a href="#contact" class="svc-link" data-svc="Notice Reply">Notice Reply</a>
+              <a href="#contact" class="svc-link" data-svc="Individual ITR Filing">Capital Gain</a>
             </div>
             <div class="md-col">
-              <a href="#services" class="md-head">Business &amp; GST</a>
-              <a href="#services">GST Registration</a>
-              <a href="#services">GST Return</a>
-              <a href="#services">GST Notice</a>
-              <a href="#services">TDS</a>
-              <a href="#services">Bookkeeping</a>
+              <span class="md-head">Business &amp; GST</span>
+              <a href="#contact" class="svc-link" data-svc="GST Registration / Return">GST Registration</a>
+              <a href="#contact" class="svc-link" data-svc="GST Registration / Return">GST Return</a>
+              <a href="#contact" class="svc-link" data-svc="Notice Reply">GST Notice</a>
+              <a href="#contact" class="svc-link" data-svc="TDS / Bookkeeping">TDS</a>
+              <a href="#contact" class="svc-link" data-svc="TDS / Bookkeeping">Bookkeeping</a>
             </div>
             <div class="md-col">
-              <a href="#services" class="md-head">Corporate</a>
-              <a href="#services">Company Incorporation</a>
-              <a href="#services">LLP Annual Filing</a>
-              <a href="#services">MCA Forms</a>
-              <a href="#services">IEPF Services</a>
-              <a href="#services">Project Report</a>
+              <span class="md-head">Corporate</span>
+              <a href="#contact" class="svc-link" data-svc="Company Incorporation / MCA">Company Incorporation</a>
+              <a href="#contact" class="svc-link" data-svc="Company Incorporation / MCA">LLP Annual Filing</a>
+              <a href="#contact" class="svc-link" data-svc="Company Incorporation / MCA">MCA Forms</a>
+              <a href="#contact" class="svc-link" data-svc="Company Incorporation / MCA">IEPF Services</a>
+              <a href="#contact" class="svc-link" data-svc="Something else">Project Report</a>
             </div>
             <div class="md-col">
-              <a href="#services" class="md-head">Audit</a>
-              <a href="#services">Statutory Audit</a>
-              <a href="#services">Tax Audit</a>
-              <a href="#services">Internal Audit</a>
+              <span class="md-head">Audit</span>
+              <a href="#contact" class="svc-link" data-svc="Audit">Statutory Audit</a>
+              <a href="#contact" class="svc-link" data-svc="Audit">Tax Audit</a>
+              <a href="#contact" class="svc-link" data-svc="Audit">Internal Audit</a>
             </div>
             <div class="md-col">
-              <a href="#services" class="md-head">Registrations &amp; More</a>
-              <a href="#services">Trademark Registration</a>
-              <a href="#services">MSME / Udyam</a>
-              <a href="#services">Import Export Code</a>
-              <a href="#services">Digital Signature (DSC)</a>
+              <span class="md-head">Registrations &amp; More</span>
+              <a href="#contact" class="svc-link" data-svc="Something else">Trademark Registration</a>
+              <a href="#contact" class="svc-link" data-svc="Something else">MSME / Udyam</a>
+              <a href="#contact" class="svc-link" data-svc="Something else">Import Export Code</a>
+              <a href="#contact" class="svc-link" data-svc="Something else">Digital Signature (DSC)</a>
             </div>
           </div>
         </li>
@@ -767,7 +803,7 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
           File My ITR
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="#services" class="btn btn-ghost">Explore Services</a>
+        <a href="/tools.html" class="btn btn-ghost">Explore Free Tools</a>
       </div>
       <div class="trust-row">
         <div class="ti"><b><span class="count" data-to="10">0</span><em>+</em></b><span>Years of experience</span></div>
@@ -817,6 +853,23 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
   </div>
 </div>
 
+<!-- ITR DEADLINE COUNTDOWN -->
+<div class="deadline" id="deadline">
+  <div class="wrap">
+    <span class="dl-lbl">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <span id="dlText">ITR filing deadline (AY 2026-27)</span>
+    </span>
+    <div class="dl-timer">
+      <div class="dl-unit"><b id="dlD">–</b><span>Days</span></div>
+      <div class="dl-unit"><b id="dlH">–</b><span>Hrs</span></div>
+      <div class="dl-unit"><b id="dlM">–</b><span>Min</span></div>
+      <div class="dl-unit"><b id="dlS">–</b><span>Sec</span></div>
+    </div>
+    <a href="#contact" class="dl-cta">File before the rush</a>
+  </div>
+</div>
+
 <!-- WHY / HOME -->
 <section class="block why">
   <div class="wrap why-grid">
@@ -842,153 +895,6 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
         Reviewed by real Chartered Accountants
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="block services" id="services">
-  <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow" style="justify-content:center">What we do</span>
-      <h2>Every tax &amp; compliance need, under one roof.</h2>
-      <p>From a salaried individual's first ITR to a company's statutory audit — our team handles it end to end.</p>
-    </div>
-    <div class="svc-cats">
-
-      <div class="svc-cat reveal">
-        <div class="ch">
-          <div class="ci t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-          <div><div class="clbl">For You</div><h3>Individual</h3></div>
-        </div>
-        <ul class="svc-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Individual ITR Filing</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Tax Planning</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Notice Reply</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Capital Gain</li>
-        </ul>
-      </div>
-
-      <div class="svc-cat reveal">
-        <div class="ch">
-          <div class="ci g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
-          <div><div class="clbl">For Traders</div><h3>Business &amp; GST</h3></div>
-        </div>
-        <ul class="svc-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> GST Registration</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> GST Return</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> GST Notice</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> TDS</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Bookkeeping</li>
-        </ul>
-      </div>
-
-      <div class="svc-cat reveal">
-        <div class="ch">
-          <div class="ci t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></div>
-          <div><div class="clbl">For Companies</div><h3>Corporate</h3></div>
-        </div>
-        <ul class="svc-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Company Incorporation</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> LLP Annual Filing</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> MCA Forms</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> IEPF Services</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Project Report</li>
-        </ul>
-      </div>
-
-      <div class="svc-cat reveal">
-        <div class="ch">
-          <div class="ci g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg></div>
-          <div><div class="clbl">Assurance</div><h3>Audit</h3></div>
-        </div>
-        <ul class="svc-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Statutory Audit</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Tax Audit</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Internal Audit</li>
-        </ul>
-      </div>
-
-      <div class="svc-cat reveal">
-        <div class="ch">
-          <div class="ci t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><path d="M21 12c-1 0-3 1-3 3s2 3 3 3-1 1-3 1-3-2-3-3 1-3 3-3M3 12c1 0 3 1 3 3s-2 3-3 3 1 1 3 1 3-2 3-3-1-3-3-3"/><circle cx="12" cy="8" r="6"/></svg></div>
-          <div><div class="clbl">Registrations</div><h3>Registrations &amp; More</h3></div>
-        </div>
-        <ul class="svc-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Trademark Registration</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> MSME / Udyam Registration</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Import Export Code (IEC)</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Digital Signature Certificate (DSC)</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- TOOLS -->
-<section class="block tools" id="tools">
-  <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow" style="justify-content:center">Free &amp; smart</span>
-      <h2>Tax tools that do the math for you.</h2>
-      <p>Quick, accurate calculators built by our CAs. Use them free — and let us handle the filing.</p>
-    </div>
-
-    <!-- FEATURED GST TOOLS -->
-    <div class="featured-tools reveal">
-      <a class="ft-card" href="/tools/gstr2b-summary-maker.html">
-        <div class="ft-badge">CA Power Tool</div>
-        <div class="ft-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="7"/><rect x="12" y="7" width="3" height="11"/><rect x="17" y="13" width="3" height="5"/></svg></div>
-        <h3>GSTR-2B Summary Maker</h3>
-        <p>Upload your GSTR-2B Excel files from the GST portal and get an instant party-wise ITC summary — all sections parsed, with a combined Excel export.</p>
-        <span class="ft-link">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="ft-card" href="/tools/gstr3b-summary-maker.html">
-        <div class="ft-badge">CA Power Tool</div>
-        <div class="ft-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
-        <h3>GSTR-3B Summary Maker</h3>
-        <p>Upload your GSTR-3B PDFs and generate a clean year-wise summary — outward supplies, ITC, RCM, late fees and a live closing-balance calculation, ready to print or export.</p>
-        <span class="ft-link">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </div>
-
-    <div class="tools-divider"><span>Quick calculators</span></div>
-
-    <div class="tools-grid">
-      <a class="tool reveal" href="/tools/income-tax-calculator.html">
-        <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h8M8 14h2M8 18h2M14 14h2M14 18h2"/></svg></div>
-        <h3>Income Tax Calculator</h3>
-        <p>Compare old vs new regime for FY 2025-26 and find your exact tax liability.</p>
-        <span class="tlink">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="tool reveal" href="/tools/gst-calculator.html">
-        <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8"/><rect x="14" y="6" width="3" height="12"/></svg></div>
-        <h3>GST Calculator</h3>
-        <p>Add or remove GST instantly across all slab rates — inclusive or exclusive.</p>
-        <span class="tlink">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="tool reveal" href="/tools/hra-calculator.html">
-        <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h3>HRA Exemption Calculator</h3>
-        <p>Work out exactly how much house rent allowance is exempt from your salary.</p>
-        <span class="tlink">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="tool reveal" href="/tools/emi-calculator.html">
-        <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg></div>
-        <h3>EMI Calculator</h3>
-        <p>Plan your loan repayments with a clear monthly EMI and interest breakup.</p>
-        <span class="tlink">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="tool reveal" href="/tools/tds-calculator.html">
-        <div class="tic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-5"/></svg></div>
-        <h3>TDS Calculator</h3>
-        <p>Estimate TDS on salary, rent, contracts and professional fees correctly.</p>
-        <span class="tlink">Open tool <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </div>
-    <div style="text-align:center;margin-top:34px" class="reveal">
-      <a href="/tools.html" class="btn btn-primary">Explore all tools <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
@@ -1061,6 +967,52 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
       <div class="wu reveal"><div class="wu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Real people, 3 cities</h3><p>Reach us in Delhi, Saharanpur or Yamunanagar — or online, whatever's easiest for you.</p></div>
       <div class="wu reveal"><div class="wu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div><h3>Maximum legal savings</h3><p>We know the deductions most people miss — and make sure you claim every rupee you're owed.</p></div>
       <div class="wu reveal"><div class="wu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Straight answers</h3><p>No confusing tax-speak. We explain your numbers in plain language you can actually follow.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="block team" id="team">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" style="justify-content:center">The people behind CleanITR</span>
+      <h2>Three CAs. Three cities. One standard of work.</h2>
+      <p>Your return is never handled by a faceless tool — it's handled by one of us, personally.</p>
+    </div>
+    <div class="team-grid">
+      <div class="tm reveal">
+        <div class="tm-photo">
+          <div class="tm-fallback">CA</div>
+          <img src="/images/team/ca-1.jpg" alt="CA Partner — Delhi — Chartered Accountant, CleanITR" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="tm-body">
+          <span class="tm-badge">Chartered Accountant</span>
+          <h3>CA Partner — Delhi</h3>
+          <div class="tm-role"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Delhi</div>
+        </div>
+      </div>
+      <div class="tm reveal">
+        <div class="tm-photo">
+          <div class="tm-fallback">CA</div>
+          <img src="/images/team/ca-2.jpg" alt="CA Partner — Saharanpur — Chartered Accountant, CleanITR" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="tm-body">
+          <span class="tm-badge">Chartered Accountant</span>
+          <h3>CA Partner — Saharanpur</h3>
+          <div class="tm-role"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Saharanpur</div>
+        </div>
+      </div>
+      <div class="tm reveal">
+        <div class="tm-photo">
+          <div class="tm-fallback">CA</div>
+          <img src="/images/team/ca-3.jpg" alt="CA Partner — Yamunanagar — Chartered Accountant, CleanITR" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="tm-body">
+          <span class="tm-badge">Chartered Accountant</span>
+          <h3>CA Partner — Yamunanagar</h3>
+          <div class="tm-role"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Yamunanagar</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1317,10 +1269,10 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
       <div class="foot-col">
         <h4>Services</h4>
         <ul>
-          <li><a href="#services">ITR Filing</a></li>
-          <li><a href="#services">GST &amp; TDS</a></li>
-          <li><a href="#services">MCA &amp; Corporate</a></li>
-          <li><a href="#services">Audit</a></li>
+          <li><a href="#contact" class="svc-link" data-svc="Individual ITR Filing">ITR Filing</a></li>
+          <li><a href="#contact" class="svc-link" data-svc="GST Registration / Return">GST &amp; TDS</a></li>
+          <li><a href="#contact" class="svc-link" data-svc="Company Incorporation / MCA">MCA &amp; Corporate</a></li>
+          <li><a href="#contact" class="svc-link" data-svc="Audit">Audit</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -1382,6 +1334,38 @@ const countIO=new IntersectionObserver((entries)=>{
   })
 },{threshold:.6});
 document.querySelectorAll('.count').forEach(el=>countIO.observe(el));
+
+// ITR deadline countdown (edit DEADLINE if the government extends the date)
+(function(){
+  const DEADLINE=new Date('2026-07-31T23:59:59+05:30');
+  const belated=new Date('2026-12-31T23:59:59+05:30');
+  const D=document.getElementById('dlD'),H=document.getElementById('dlH'),M=document.getElementById('dlM'),S=document.getElementById('dlS');
+  function tick(){
+    const now=new Date();
+    let target=DEADLINE;
+    if(now>DEADLINE){
+      if(now>belated){document.getElementById('deadline').style.display='none';return}
+      document.getElementById('dlText').textContent='Belated ITR deadline (AY 2026-27)';
+      target=belated;
+    }
+    const d=target-now;
+    D.textContent=Math.floor(d/864e5);
+    H.textContent=String(Math.floor(d/36e5)%24).padStart(2,'0');
+    M.textContent=String(Math.floor(d/6e4)%60).padStart(2,'0');
+    S.textContent=String(Math.floor(d/1e3)%60).padStart(2,'0');
+    setTimeout(tick,1000);
+  }
+  tick();
+})();
+
+// Service dropdown -> scroll to contact with the service preselected in the form
+document.querySelectorAll('.svc-link').forEach(a=>a.addEventListener('click',()=>{
+  const svc=a.dataset.svc;
+  if(!svc)return;
+  const sel=document.getElementById('cservice');
+  [...sel.options].forEach(o=>{if(o.text===svc)sel.value=o.text});
+}));
+
 
 // Contact form -> opens mail
 document.getElementById('sendBtn').addEventListener('click',()=>{
