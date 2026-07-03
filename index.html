@@ -128,6 +128,24 @@ header{
     border-radius:10px;padding:14px;margin-top:6px}
   .has-drop.open-drop .mega-drop{display:flex}
 }
+.mini-drop{padding:14px 10px;min-width:200px}
+.mini-drop .md-col{min-width:170px}
+.mini-drop .md-col a{font-size:.88rem;padding:8px 12px}
+.md-all{color:var(--teal) !important;font-weight:700 !important;border-top:1px solid var(--line);margin-top:6px;padding-top:10px !important}
+/* ===== ILLUSTRATION PANELS ===== */
+.illus{width:100%;height:auto;display:block}
+.why-illus{margin-top:26px;border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.trustband{padding:66px 0;background:linear-gradient(180deg,var(--paper) 0%,#eef3ee 100%)}
+.tb-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+@media(max-width:900px){.tb-grid{grid-template-columns:1fr;gap:30px}}
+.tb-art{border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.tb-text h2{font-size:clamp(1.5rem,3.2vw,2.1rem);margin:10px 0 14px}
+.tb-text p{color:var(--ink-soft);margin-bottom:14px}
+.tb-points{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.tb-pt{display:flex;gap:12px;align-items:flex-start}
+.tb-pt .n{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:var(--teal-light);color:var(--teal);display:grid;place-items:center;font-family:'Sora';font-weight:800;font-size:.85rem}
+.tb-pt b{display:block;font-size:.95rem}
+.tb-pt span{font-size:.86rem;color:var(--ink-soft)}
 /* ===== TESTIMONIAL MARQUEE ===== */
 .testi-marquee{overflow:hidden;position:relative;padding:6px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .testi-track{display:flex;gap:22px;width:max-content;will-change:transform}
@@ -152,20 +170,6 @@ header{
 .dl-unit span{font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
 .dl-cta{font-size:.8rem;font-weight:700;background:var(--gold);color:#fff;padding:8px 16px;border-radius:9px;transition:.2s}
 .dl-cta:hover{background:#b57722;transform:translateY(-1px)}
-/* ===== TEAM ===== */
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:920px;margin:0 auto}
-@media(max-width:880px){.team-grid{grid-template-columns:1fr;max-width:400px}}
-.tm{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;text-align:center;transition:.25s}
-.tm:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
-.tm-photo{position:relative;height:250px;background:linear-gradient(160deg,var(--teal-light),var(--gold-light));display:grid;place-items:center;overflow:hidden}
-.tm-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;transition:.4s}
-.tm:hover .tm-photo img{transform:scale(1.04)}
-.tm-fallback{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;display:grid;place-items:center;font-family:'Sora';font-weight:800;font-size:1.9rem;box-shadow:0 8px 24px rgba(14,124,102,.35)}
-.tm-body{padding:20px 18px 24px}
-.tm-body .tm-badge{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:var(--gold-light);padding:4px 11px;border-radius:99px;margin-bottom:10px}
-.tm-body h3{font-size:1.08rem;margin-bottom:4px}
-.tm-body .tm-role{font-size:.84rem;color:var(--ink-soft);display:flex;align-items:center;justify-content:center;gap:6px}
-.tm-body .tm-role svg{width:14px;height:14px;color:var(--teal)}
 
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
 .burger span{width:24px;height:2.5px;background:var(--ink);border-radius:2px;transition:.25s}
@@ -781,8 +785,32 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
             </div>
           </div>
         </li>
-        <li><a href="/tools.html">Tools</a></li>
-        <li><a href="/blog.html">Blogs</a></li>
+        <li class="has-drop">
+          <a href="/tools.html" class="drop-trigger">Tools
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+          <div class="mega-drop mini-drop">
+            <div class="md-col">
+              <a href="/tools.html#gst-tools">GST Tools</a>
+              <a href="/tools.html#income-tax-tools">Income Tax Tools</a>
+              <a href="/tools.html#other-tools">Other Tools</a>
+              <a href="/tools.html" class="md-all">All tools →</a>
+            </div>
+          </div>
+        </li>
+        <li class="has-drop">
+          <a href="/blog.html" class="drop-trigger">Blogs
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+          <div class="mega-drop mini-drop">
+            <div class="md-col">
+              <a href="/blog.html?cat=ITR">ITR</a>
+              <a href="/blog.html?cat=GST">GST</a>
+              <a href="/blog.html?cat=Others">Others</a>
+              <a href="/blog.html" class="md-all">All articles →</a>
+            </div>
+          </div>
+        </li>
         <li><a href="#contact">Contact Us</a></li>
         <li><a href="#contact" class="nav-cta">File My ITR</a></li>
       </ul>
@@ -971,47 +999,79 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
   </div>
 </section>
 
-<!-- TEAM -->
-<section class="block team" id="team">
-  <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow" style="justify-content:center">The people behind CleanITR</span>
-      <h2>Three CAs. Three cities. One standard of work.</h2>
-      <p>Your return is never handled by a faceless tool — it's handled by one of us, personally.</p>
+<!-- TRUST BAND (illustrated) -->
+<section class="trustband">
+  <div class="wrap tb-grid">
+    <div class="tb-art reveal">
+      <svg class="illus" viewBox="0 0 560 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A tax professional reviewing a return at a desk">
+  <rect width="560" height="420" fill="#eaf3ef"/>
+  <!-- wall art -->
+  <rect x="52" y="46" width="120" height="86" rx="8" fill="#ffffff"/>
+  <rect x="70" y="96" width="14" height="22" rx="3" fill="#0e7c66"/>
+  <rect x="92" y="82" width="14" height="36" rx="3" fill="#c8862a"/>
+  <rect x="114" y="68" width="14" height="50" rx="3" fill="#0e7c66"/>
+  <rect x="136" y="88" width="14" height="30" rx="3" fill="#8fc7b5"/>
+  <!-- clock -->
+  <circle cx="430" cy="80" r="30" fill="#ffffff"/>
+  <circle cx="430" cy="80" r="24" fill="none" stroke="#0e7c66" stroke-width="3"/>
+  <path d="M430 68v12l9 6" stroke="#c8862a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- floating shield check -->
+  <g>
+    <path d="M320 44l30 11v22c0 20-13 33-30 39-17-6-30-19-30-39V55z" fill="#0e7c66"/>
+    <path d="M306 82l10 10 20-22" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <!-- rupee coin -->
+  <circle cx="500" cy="180" r="26" fill="#f4e9d6"/>
+  <circle cx="500" cy="180" r="26" fill="none" stroke="#c8862a" stroke-width="3"/>
+  <text x="500" y="190" text-anchor="middle" font-family="Sora,Arial" font-weight="800" font-size="26" fill="#c8862a">₹</text>
+  <!-- plant -->
+  <path d="M62 296c0-26 12-44 12-44s12 18 12 44z" fill="#0e7c66"/>
+  <path d="M74 296c-16-10-34-8-34-8s8 18 30 16z" fill="#12967d"/>
+  <path d="M74 296c16-10 34-8 34-8s-8 18-30 16z" fill="#0a5f4f"/>
+  <rect x="60" y="300" width="28" height="26" rx="5" fill="#c8862a"/>
+  <!-- desk -->
+  <rect x="30" y="326" width="500" height="16" rx="8" fill="#0f2a2e"/>
+  <rect x="70" y="342" width="14" height="60" rx="4" fill="#33514f"/>
+  <rect x="476" y="342" width="14" height="60" rx="4" fill="#33514f"/>
+  <!-- documents stack -->
+  <rect x="380" y="288" width="86" height="10" rx="3" fill="#ffffff"/>
+  <rect x="386" y="276" width="74" height="10" rx="3" fill="#dff0ea"/>
+  <rect x="392" y="264" width="62" height="10" rx="3" fill="#ffffff"/>
+  <!-- person -->
+  <circle cx="230" cy="196" r="30" fill="#e8b98a"/>
+  <path d="M200 190c0-22 14-34 30-34s30 12 30 34c0-6-10-16-30-16s-30 10-30 16z" fill="#0f2a2e"/>
+  <path d="M172 326c4-52 26-78 58-78s54 26 58 78z" fill="#0e7c66"/>
+  <path d="M206 258l24 20 24-20-8-8h-32z" fill="#ffffff"/>
+  <!-- arms to laptop -->
+  <path d="M186 292c10 14 26 22 44 24" stroke="#0e7c66" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <path d="M274 292c-8 12-20 20-36 24" stroke="#0a5f4f" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <circle cx="232" cy="318" r="9" fill="#e8b98a"/>
+  <circle cx="252" cy="318" r="9" fill="#e8b98a"/>
+  <!-- laptop -->
+  <path d="M196 268h120v54a6 6 0 0 1-6 6H202a6 6 0 0 1-6-6z" fill="#12363b" opacity="0"/>
+  <rect x="200" y="252" width="116" height="74" rx="7" fill="#0f2a2e"/>
+  <rect x="207" y="259" width="102" height="60" rx="4" fill="#eaf7f2"/>
+  <path d="M216 296l10-10 9 8 16-18 12 12" stroke="#0e7c66" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="290" cy="272" r="10" fill="#c8862a"/>
+  <path d="M285 272l4 4 7-8" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="176" y="326" width="164" height="9" rx="4.5" fill="#33514f"/>
+  <!-- paper on desk with tick -->
+  <g transform="rotate(-6 120 300)">
+    <rect x="96" y="270" width="66" height="48" rx="6" fill="#ffffff"/>
+    <rect x="104" y="280" width="42" height="5" rx="2.5" fill="#dbe6e0"/>
+    <rect x="104" y="291" width="50" height="5" rx="2.5" fill="#dbe6e0"/>
+    <path d="M106 306l6 6 12-13" stroke="#0e7c66" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
     </div>
-    <div class="team-grid">
-      <div class="tm reveal">
-        <div class="tm-photo">
-          <div class="tm-fallback">CA</div>
-          <img src="/images/team/ca-1.jpg" alt="CA Partner — Delhi — Chartered Accountant, CleanITR" loading="lazy" onerror="this.remove()">
-        </div>
-        <div class="tm-body">
-          <span class="tm-badge">Chartered Accountant</span>
-          <h3>CA Partner — Delhi</h3>
-          <div class="tm-role"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Delhi</div>
-        </div>
-      </div>
-      <div class="tm reveal">
-        <div class="tm-photo">
-          <div class="tm-fallback">CA</div>
-          <img src="/images/team/ca-2.jpg" alt="CA Partner — Saharanpur — Chartered Accountant, CleanITR" loading="lazy" onerror="this.remove()">
-        </div>
-        <div class="tm-body">
-          <span class="tm-badge">Chartered Accountant</span>
-          <h3>CA Partner — Saharanpur</h3>
-          <div class="tm-role"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Saharanpur</div>
-        </div>
-      </div>
-      <div class="tm reveal">
-        <div class="tm-photo">
-          <div class="tm-fallback">CA</div>
-          <img src="/images/team/ca-3.jpg" alt="CA Partner — Yamunanagar — Chartered Accountant, CleanITR" loading="lazy" onerror="this.remove()">
-        </div>
-        <div class="tm-body">
-          <span class="tm-badge">Chartered Accountant</span>
-          <h3>CA Partner — Yamunanagar</h3>
-          <div class="tm-role"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Yamunanagar</div>
-        </div>
+    <div class="tb-text reveal">
+      <span class="eyebrow">How your return is handled</span>
+      <h2>Technology does the math. A professional signs off.</h2>
+      <p>Every return that goes through CleanITR is prepared with smart tools and then personally reviewed line-by-line before filing — the same standard whether it's a simple salary return or a complex business case.</p>
+      <div class="tb-points">
+        <div class="tb-pt"><span class="n">1</span><div><b>Nothing filed blind</b><span>Every deduction, every figure is cross-checked against your documents.</span></div></div>
+        <div class="tb-pt"><span class="n">2</span><div><b>Deadline tracked for you</b><span>We monitor due dates across ITR, GST and TDS so penalties never surprise you.</span></div></div>
+        <div class="tb-pt"><span class="n">3</span><div><b>Support after filing too</b><span>Notice aaye toh bhi hum hain — replies and follow-ups are part of the job.</span></div></div>
       </div>
     </div>
   </div>

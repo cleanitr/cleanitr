@@ -134,15 +134,17 @@ const articleView=document.getElementById('articleView');
 
 function fmtDate(iso){try{return new Date(iso).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}catch(e){return ''}}
 
+// Categories are grouped: ITR, GST, and everything else (Notices, TDS, MCA, General) under "Others"
+function groupOf(cat){return (cat==='ITR'||cat==='GST')?cat:'Others'}
 function renderChips(){
-  const cats=['All',...new Set(allPosts.map(p=>p.category))];
+  const cats=['All','ITR','GST','Others'];
   document.getElementById('chips').innerHTML=cats.map(c=>
     `<button class="chip${c===activeCat?' on':''}" onclick="filterCat('${c}')">${c}</button>`).join('');
 }
 function filterCat(c){activeCat=c;renderChips();renderGrid()}
 
 function renderGrid(){
-  const posts=activeCat==='All'?allPosts:allPosts.filter(p=>p.category===activeCat);
+  const posts=activeCat==='All'?allPosts:allPosts.filter(p=>groupOf(p.category)===activeCat);
   if(!posts.length){grid.innerHTML='<p class="msg">No articles in this category yet — check back soon.</p>';return}
   grid.innerHTML=posts.map(p=>{
     const icon=catIcons[p.category]||catIcons.General;
@@ -194,9 +196,12 @@ window.addEventListener('popstate',()=>{
 fetch('/posts.json?_='+Date.now()).then(r=>r.json()).then(posts=>{
   allPosts=posts;
   bySlug=Object.fromEntries(posts.map(p=>[p.slug,p]));
+  const params=new URLSearchParams(location.search);
+  const cat=params.get('cat');
+  if(cat&&['ITR','GST','Others'].includes(cat))activeCat=cat;
   renderChips();
   renderGrid();
-  const slug=new URLSearchParams(location.search).get('post');
+  const slug=params.get('post');
   if(slug&&bySlug[slug])openPost(slug,false);
 }).catch(err=>{
   grid.innerHTML='<p class="msg">Unable to load articles right now.</p>';
