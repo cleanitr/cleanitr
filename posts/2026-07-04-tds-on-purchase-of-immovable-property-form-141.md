@@ -1,12 +1,14 @@
 ---
-title: "TDS on Purchase of Immovable Property under the Income-tax Act, 2025 — Section 393(1) & Form 141 Complete Guide"
+title: TDS on Purchase of Immovable Property under the Income-tax Act, 2025 —
+  Section 393(1) & Form 141 Complete Guide
 category: TDS
 readtime: 12 min read
 date: 2026-07-04T10:00:00.000+05:30
-summary: Buying property worth ₹50 lakh or more? Here's the complete guide to
-  1% TDS under Section 393(1) [Table Sl. No. 3(i)] of the new Income-tax Act,
-  2025 (old Section 194-IA) — meaning of immovable property, agricultural land
-  test, Form 141 filing steps, worked example and old vs new Act comparison.
+image: /images/uploads/tds-on-property-purchase-update.png
+summary: Buying property worth ₹50 lakh or more? Here's the complete guide to 1%
+  TDS under Section 393(1) [Table Sl. No. 3(i)] of the new Income-tax Act, 2025
+  (old Section 194-IA) — meaning of immovable property, agricultural land test,
+  Form 141 filing steps, worked example and old vs new Act comparison.
 ---
 The Income-tax Act, 2025 has replaced the Income-tax Act, 1961 with effect from **1st April 2026**. The familiar provision requiring a property buyer to deduct tax at source — earlier **Section 194-IA** — is now housed in **Section 393(1) [Table: Sl. No. 3(i)]**, and the well-known **Form 26QB** has been replaced by the new consolidated **Form 141 (Schedule B)** under the Income-tax Rules, 2026.
 
