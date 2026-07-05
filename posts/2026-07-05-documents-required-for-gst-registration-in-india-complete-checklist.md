@@ -3,10 +3,10 @@ title: "Documents Required for GST Registration in India: Complete Checklist (20
 category: GST
 readtime: 9 min read
 date: 2026-07-05T10:00:00.000+05:30
-image: /images/uploads/who-is-eligible-for-gst-return.jpg
-summary: A complete, easy-to-understand checklist of every document you need
-  for GST registration — for proprietorships, partnerships, LLPs, companies,
-  HUFs and trusts — updated as applicable today.
+image: /images/uploads/gst-doc.png
+summary: A complete, easy-to-understand checklist of every document you need for
+  GST registration — for proprietorships, partnerships, LLPs, companies, HUFs
+  and trusts — updated as applicable today.
 ---
 GST registration is the process through which a business obtains its unique 15-digit **GST Identification Number (GSTIN)** from the tax authorities. The entire process is **completely online and free of cost** on the official GST portal ([www.gst.gov.in](https://www.gst.gov.in)) — yet the single most common reason applications get delayed or rejected is incorrect, unclear or mismatched documents. This guide gives you the complete, updated checklist so your application sails through, usually within **3–7 working days**.
 
