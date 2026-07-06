@@ -3,7 +3,7 @@ title: "Income Tax Rates for FY 2025-26 (AY 2026-27): A Complete Guide"
 category: ITR
 readtime: 10 min read
 date: 2026-07-02T16:36:00.000+05:30
-image: /images/uploads/income-tax-rates.png
+image: /images/uploads/tax_slabs_comparison.png
 summary: As amended by the Finance Act, 2026 — a complete, easy-to-understand
   breakdown of the new vs old tax regime slabs, rebates, surcharge and cess for
   AY 2026-27.

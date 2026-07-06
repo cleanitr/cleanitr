@@ -40,3 +40,15 @@ header{position:sticky;top:0;z-index:100;background:rgba(247,245,239,.86);backdr
 .cta a{color:var(--teal);font-weight:700}
 .note{margin-top:18px;font-size:.8rem;color:var(--ink-soft)}
 footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-size:.82rem;color:var(--ink-soft)}
+
+/* ===== v5 refinements ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.result.show{animation:fadeUp .35s ease}
+.copy-btn{margin-top:16px;width:100%;padding:11px;border:1.5px solid var(--teal);border-radius:10px;background:var(--teal-light);color:var(--teal-deep);font:inherit;font-weight:700;font-size:.88rem;cursor:pointer;transition:.2s}
+.copy-btn:hover{background:var(--teal);color:#fff}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+@media(max-width:640px){.info-grid{grid-template-columns:1fr}}
+.info-box{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.info-box h3{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.info-box h3 svg{width:15px;height:15px}
+.info-box p{font-size:.88rem;color:var(--ink-soft);line-height:1.65}

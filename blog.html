@@ -29,7 +29,7 @@
 @media(max-width:600px){.bgrid{grid-template-columns:1fr}}
 .post{display:flex;flex-direction:column;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:.22s;cursor:pointer}
 .post:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(15,42,46,.12)}
-.pimg{position:relative;height:180px;background:linear-gradient(135deg,var(--teal-light),var(--gold-light));display:grid;place-items:center;color:var(--teal)}
+.pimg{position:relative;height:180px;background:linear-gradient(135deg,var(--teal-light),var(--gold-light));background-image:radial-gradient(rgba(14,124,102,.14) 1.2px,transparent 1.2px),linear-gradient(135deg,var(--teal-light),var(--gold-light));background-size:16px 16px,cover;display:grid;place-items:center;color:var(--teal)}
 .pimg svg{width:44px;height:44px;opacity:.55}
 .pimg img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .pcat{position:absolute;top:13px;left:13px;z-index:2;font-size:.64rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.92);color:var(--teal);padding:5px 10px;border-radius:99px}
@@ -53,7 +53,7 @@
 /* cover image — responsive, adapts to any aspect ratio */
 .a-cover{margin:0 0 32px;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
 .a-cover img{display:block;width:100%;height:auto;max-height:480px;object-fit:cover}
-.a-body{font-size:1.02rem}
+.a-body{font-size:1.05rem;line-height:1.75}
 .a-body h2,.a-body h3{margin:30px 0 12px}
 .a-body h2{font-size:1.4rem}
 .a-body h3{font-size:1.15rem}
@@ -71,9 +71,11 @@
 .a-cta p{opacity:.9;font-size:.92rem;margin-bottom:18px}
 .a-cta a{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--teal-deep);font-weight:700;padding:12px 24px;border-radius:11px;font-size:.94rem}
 .msg{grid-column:1/-1;text-align:center;color:var(--ink-soft);padding:40px 0}
+.scrollbar-top{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--teal));z-index:300}
 </style>
 </head>
 <body>
+<div class="scrollbar-top" id="scrollbarTop"></div>
 <header>
   <div class="nav">
     <a href="/" class="brand">
@@ -119,6 +121,11 @@
 <footer>© 2026 Clean ITR · Tax Platform by Chartered Accountants.</footer>
 
 <script>
+// scroll progress
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('scrollbarTop').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100||0)+'%';
+},{passive:true});
 const catIcons={
   ITR:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>',
   GST:'<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>',

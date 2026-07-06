@@ -41,9 +41,13 @@
       <button class="btn" onclick="calc()">Calculate exemption</button>
       <div class="result" id="res"></div>
     </div>
+    <div class="info-grid">
+      <div class="info-box"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>Who should use this</h3><p>Salaried employees who receive HRA and pay rent — and want to claim the correct exemption under the old regime.</p></div>
+      <div class="info-box"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>Example</h3><p>Basic ₹6L, HRA received ₹2.4L, rent ₹3L in Delhi → exemption is the least of the three amounts shown in the working above.</p></div>
+    </div>
     <div class="cta">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <span>Want a CA to verify and file for you? Email <a href="mailto:info.cleanitr@gmail.com">info.cleanitr@gmail.com</a> or <a href="https://wa.me/917838808704" target="_blank" rel="noopener">WhatsApp us</a>.</span>
+      <span>Need this reviewed or have a doubt? Write to us at <a href="mailto:info.cleanitr@gmail.com">info.cleanitr@gmail.com</a> or message us on <a href="https://wa.me/917838808704" target="_blank" rel="noopener">WhatsApp</a>.</span>
     </div>
     <p class="note">HRA exemption is available only under the old tax regime. Basic salary here means basic pay + dearness allowance (if it forms part of retirement benefits). Metro cities: Delhi, Mumbai, Kolkata, Chennai.</p>
   </div>
@@ -68,6 +72,40 @@ function calc(){
     <div class="r-row"><span>Taxable HRA</span><b>${inr(taxable)}</b></div>`;
   el.classList.add('show');
 }
+
+// Copy result + count-up on the highlighted amount
+(function(){
+  const resEl=document.getElementById('res');
+  if(!resEl)return;
+  new MutationObserver(()=>{
+    if(!resEl.innerHTML.trim())return;
+    // count-up animation on .r-big amounts
+    resEl.querySelectorAll('.r-big').forEach(el=>{
+      const m=el.textContent.match(/[\d,]+/);
+      if(!m)return;
+      const target=parseInt(m[0].replace(/,/g,''),10);
+      if(!isFinite(target)||target<=0)return;
+      const t0=performance.now(),dur=500,prefix=el.textContent.slice(0,el.textContent.indexOf(m[0]));
+      (function step(t){
+        const p=Math.min((t-t0)/dur,1);
+        el.textContent=prefix+Math.round(target*(0.2+0.8*p)).toLocaleString('en-IN');
+        if(p<1)requestAnimationFrame(step);
+      })(t0);
+    });
+    // copy button
+    if(!resEl.querySelector('.copy-btn')){
+      const b=document.createElement('button');
+      b.className='copy-btn';b.type='button';b.textContent='Copy result';
+      b.onclick=()=>{
+        const txt=[...resEl.querySelectorAll('.r-row,.r-best')].map(r=>r.innerText.replace(/\n/g,' ')).join('\n');
+        navigator.clipboard.writeText('CleanITR — '+document.title.split('—')[0].trim()+'\n'+txt).then(()=>{
+          b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy result',1500);
+        });
+      };
+      resEl.appendChild(b);
+    }
+  }).observe(resEl,{childList:true});
+})();
 </script>
 </body>
 </html>
