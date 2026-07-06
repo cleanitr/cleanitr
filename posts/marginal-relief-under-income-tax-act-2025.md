@@ -1,9 +1,23 @@
 ---
-title: "Marginal Relief under the Income Tax Act, 2025 – Meaning, Calculation & Examples"
-description: "Complete guide to Marginal Relief under the Income Tax Act, 2025 – meaning, surcharge rates, eligibility, and calculation with examples for FY 2025-26 and FY 2026-27."
+title: Marginal Relief under the Income Tax Act, 2025 – Meaning, Calculation &
+  Examples
+category: ITR
+readtime: 5 Min Read
 date: 2026-07-06
-author: "CleanITR"
-tags: ["income tax", "marginal relief", "surcharge", "tax planning"]
+summary: Marginal relief is a built-in safeguard in the Income Tax Act that
+  ensures a taxpayer does not end up paying more additional tax than the
+  additional income earned above a particular threshold. This guide explains
+  what it means, how surcharge works, who can claim it, and how it is calculated
+  — with examples for FY 2025-26 and FY 2026-27.
+author: CleanITR
+tags:
+  - income tax
+  - marginal relief
+  - surcharge
+  - tax planning
+description: Complete guide to Marginal Relief under the Income Tax Act, 2025 –
+  meaning, surcharge rates, eligibility, and calculation with examples for FY
+  2025-26 and FY 2026-27.
 ---
 
 Marginal relief is a built-in safeguard in the Income Tax Act that ensures a taxpayer does not end up paying more *additional* tax than the *additional* income earned above a particular threshold. This guide explains what it means, how surcharge works, who can claim it, and how it is calculated — with examples for FY 2025-26 and FY 2026-27.
