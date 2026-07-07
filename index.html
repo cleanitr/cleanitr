@@ -430,6 +430,12 @@ section.block{padding:88px 0}
 .field textarea{resize:vertical;min-height:90px}
 .cform .btn-primary{width:100%;justify-content:center;margin-top:6px}
 .cform-note{font-size:.8rem;color:var(--ink-soft);text-align:center;margin-top:14px}
+.csend-label{font-size:.82rem;font-weight:600;color:var(--ink-soft);margin:4px 0 10px}
+.send-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:420px){.send-row{grid-template-columns:1fr}}
+.send-row .btn{width:100%;justify-content:center}
+.btn-wa{background:#25D366;color:#fff;border:none}
+.btn-wa:hover{background:#1ebe57}
 
 /* ===== FOOTER ===== */
 footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
@@ -790,36 +796,36 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
               <a href="#contact" class="svc-link" data-svc="Individual ITR Filing">Individual ITR Filing</a>
               <a href="#contact" class="svc-link" data-svc="Tax Planning">Tax Planning</a>
               <a href="#contact" class="svc-link" data-svc="Notice Reply">Notice Reply</a>
-              <a href="#contact" class="svc-link" data-svc="Individual ITR Filing">Capital Gain</a>
+              <a href="#contact" class="svc-link" data-svc="Capital Gain">Capital Gain</a>
             </div>
             <div class="md-col">
               <a href="#contact" class="md-head svc-link" data-svc="">Business &amp; GST</a>
-              <a href="#contact" class="svc-link" data-svc="GST Registration / Return">GST Registration</a>
-              <a href="#contact" class="svc-link" data-svc="GST Registration / Return">GST Return</a>
-              <a href="#contact" class="svc-link" data-svc="Notice Reply">GST Notice</a>
-              <a href="#contact" class="svc-link" data-svc="TDS / Bookkeeping">TDS</a>
-              <a href="#contact" class="svc-link" data-svc="TDS / Bookkeeping">Bookkeeping</a>
+              <a href="#contact" class="svc-link" data-svc="GST Registration">GST Registration</a>
+              <a href="#contact" class="svc-link" data-svc="GST Return">GST Return</a>
+              <a href="#contact" class="svc-link" data-svc="GST Notice">GST Notice</a>
+              <a href="#contact" class="svc-link" data-svc="TDS">TDS</a>
+              <a href="#contact" class="svc-link" data-svc="Bookkeeping">Bookkeeping</a>
             </div>
             <div class="md-col">
               <a href="#contact" class="md-head svc-link" data-svc="">Corporate</a>
-              <a href="#contact" class="svc-link" data-svc="Company Incorporation / MCA">Company Incorporation</a>
-              <a href="#contact" class="svc-link" data-svc="Company Incorporation / MCA">LLP Annual Filing</a>
-              <a href="#contact" class="svc-link" data-svc="Company Incorporation / MCA">MCA Forms</a>
-              <a href="#contact" class="svc-link" data-svc="Company Incorporation / MCA">IEPF Services</a>
-              <a href="#contact" class="svc-link" data-svc="Something else">Project Report</a>
+              <a href="#contact" class="svc-link" data-svc="Company Incorporation">Company Incorporation</a>
+              <a href="#contact" class="svc-link" data-svc="LLP Annual Filing">LLP Annual Filing</a>
+              <a href="#contact" class="svc-link" data-svc="MCA Forms">MCA Forms</a>
+              <a href="#contact" class="svc-link" data-svc="IEPF Services">IEPF Services</a>
+              <a href="#contact" class="svc-link" data-svc="Project Report">Project Report</a>
             </div>
             <div class="md-col">
               <a href="#contact" class="md-head svc-link" data-svc="">Audit</a>
-              <a href="#contact" class="svc-link" data-svc="Audit">Statutory Audit</a>
-              <a href="#contact" class="svc-link" data-svc="Audit">Tax Audit</a>
-              <a href="#contact" class="svc-link" data-svc="Audit">Internal Audit</a>
+              <a href="#contact" class="svc-link" data-svc="Statutory Audit">Statutory Audit</a>
+              <a href="#contact" class="svc-link" data-svc="Tax Audit">Tax Audit</a>
+              <a href="#contact" class="svc-link" data-svc="Internal Audit">Internal Audit</a>
             </div>
             <div class="md-col">
               <a href="#contact" class="md-head svc-link" data-svc="">Registrations &amp; More</a>
-              <a href="#contact" class="svc-link" data-svc="Something else">Trademark Registration</a>
-              <a href="#contact" class="svc-link" data-svc="Something else">MSME / Udyam</a>
-              <a href="#contact" class="svc-link" data-svc="Something else">Import Export Code</a>
-              <a href="#contact" class="svc-link" data-svc="Something else">Digital Signature (DSC)</a>
+              <a href="#contact" class="svc-link" data-svc="Trademark Registration">Trademark Registration</a>
+              <a href="#contact" class="svc-link" data-svc="MSME / Udyam">MSME / Udyam</a>
+              <a href="#contact" class="svc-link" data-svc="Import Export Code">Import Export Code</a>
+              <a href="#contact" class="svc-link" data-svc="Digital Signature (DSC)">Digital Signature (DSC)</a>
             </div>
           </div>
         </li>
@@ -842,8 +848,9 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
           </a>
           <div class="mega-drop mini-drop">
             <div class="md-col">
-              <a href="/blog.html?cat=ITR">ITR</a>
-              <a href="/blog.html?cat=GST">GST</a>
+              <a href="/blog.html?cat=Direct Tax">Direct Tax</a>
+              <a href="/blog.html?cat=Indirect Tax">Indirect Tax</a>
+              <a href="/blog.html?cat=Corporate Compliance">Corporate Compliance</a>
               <a href="/blog.html?cat=Others">Others</a>
               <a href="/blog.html" class="md-all">All articles →</a>
             </div>
@@ -933,7 +940,7 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
       <div class="dl-unit"><b id="dlM">–</b><span>Min</span></div>
       <div class="dl-unit"><b id="dlS">–</b><span>Sec</span></div>
     </div>
-    <a href="/blog.html?cat=ITR" class="dl-cta">Check what you need →</a>
+    <a href="/blog.html?cat=Direct Tax" class="dl-cta">Check what you need →</a>
   </div>
 </div>
 
@@ -1316,13 +1323,37 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
       <div class="field">
         <label for="cservice">What do you need help with?</label>
         <select id="cservice">
-          <option>Individual ITR Filing</option>
-          <option>Tax Planning</option>
-          <option>GST Registration / Return</option>
-          <option>TDS / Bookkeeping</option>
-          <option>Company Incorporation / MCA</option>
-          <option>Audit</option>
-          <option>Notice Reply</option>
+          <optgroup label="Individual">
+            <option>Individual ITR Filing</option>
+            <option>Tax Planning</option>
+            <option>Notice Reply</option>
+            <option>Capital Gain</option>
+          </optgroup>
+          <optgroup label="Business &amp; GST">
+            <option>GST Registration</option>
+            <option>GST Return</option>
+            <option>GST Notice</option>
+            <option>TDS</option>
+            <option>Bookkeeping</option>
+          </optgroup>
+          <optgroup label="Corporate">
+            <option>Company Incorporation</option>
+            <option>LLP Annual Filing</option>
+            <option>MCA Forms</option>
+            <option>IEPF Services</option>
+            <option>Project Report</option>
+          </optgroup>
+          <optgroup label="Audit">
+            <option>Statutory Audit</option>
+            <option>Tax Audit</option>
+            <option>Internal Audit</option>
+          </optgroup>
+          <optgroup label="Registrations &amp; More">
+            <option>Trademark Registration</option>
+            <option>MSME / Udyam</option>
+            <option>Import Export Code</option>
+            <option>Digital Signature (DSC)</option>
+          </optgroup>
           <option>Something else</option>
         </select>
       </div>
@@ -1330,10 +1361,22 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
         <label for="cmsg">Message (optional)</label>
         <textarea id="cmsg" placeholder="Briefly describe your requirement"></textarea>
       </div>
-      <button class="btn btn-primary" id="sendBtn">
-        Send request
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-      </button>
+      <div class="field">
+        <label for="ccaptcha">Security check — solve to continue <span id="captchaQ" style="font-weight:700;color:var(--teal)"></span></label>
+        <input type="text" id="ccaptcha" inputmode="numeric" autocomplete="off" placeholder="Your answer">
+        <span id="captchaErr" style="display:none;font-size:.8rem;color:#c0392b;margin-top:5px">Incorrect answer — please try again.</span>
+      </div>
+      <p class="csend-label">Choose how we should reach you:</p>
+      <div class="send-row">
+        <button class="btn btn-primary" id="sendMailBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          Send via Email
+        </button>
+        <button class="btn btn-wa" id="sendWaBtn">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.16c-.24.68-1.42 1.32-1.95 1.36-.5.05-1.13.24-3.65-.76-3.07-1.21-5.02-4.35-5.17-4.55-.15-.2-1.24-1.65-1.24-3.15s.79-2.24 1.07-2.54c.28-.3.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.07.68.52.24.59.83 2.04.9 2.19.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.18-.31.4-.45.53-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.03 1.12 1 2.07 1.31 2.36 1.46.3.15.47.12.64-.07.17-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.72.81 2.01.96.3.15.5.22.57.35.07.12.07.72-.17 1.4Z"/></svg>
+          Send via WhatsApp
+        </button>
+      </div>
       <p class="cform-note">Or email us directly at <a href="mailto:info.cleanitr@gmail.com" style="color:var(--teal);font-weight:600">info.cleanitr@gmail.com</a></p>
     </div>
   </div>
@@ -1386,9 +1429,9 @@ footer{background:#0a1f22;color:rgba(255,255,255,.72);padding:60px 0 28px}
         <h4>Services</h4>
         <ul>
           <li><a href="#contact" class="svc-link" data-svc="Individual ITR Filing">ITR Filing</a></li>
-          <li><a href="#contact" class="svc-link" data-svc="GST Registration / Return">GST &amp; TDS</a></li>
-          <li><a href="#contact" class="svc-link" data-svc="Company Incorporation / MCA">MCA &amp; Corporate</a></li>
-          <li><a href="#contact" class="svc-link" data-svc="Audit">Audit</a></li>
+          <li><a href="#contact" class="svc-link" data-svc="GST Registration">GST &amp; TDS</a></li>
+          <li><a href="#contact" class="svc-link" data-svc="Company Incorporation">MCA &amp; Corporate</a></li>
+          <li><a href="#contact" class="svc-link" data-svc="Statutory Audit">Audit</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -1494,15 +1537,49 @@ document.querySelectorAll('.svc-link').forEach(a=>a.addEventListener('click',()=
 }));
 
 
-// Contact form -> opens mail
-document.getElementById('sendBtn').addEventListener('click',()=>{
-  const n=document.getElementById('cname').value||'';
-  const p=document.getElementById('cphone').value||'';
+// ===== Enquiry form: math captcha + Email / WhatsApp send =====
+const WA_NUMBER='917838808704'; // CleanITR WhatsApp number (country code + number, no +)
+let captchaA=0,captchaB=0;
+function newCaptcha(){
+  captchaA=Math.floor(Math.random()*9)+1;
+  captchaB=Math.floor(Math.random()*9)+1;
+  const q=document.getElementById('captchaQ');
+  if(q)q.textContent=`(${captchaA} + ${captchaB} = ?)`;
+  const inp=document.getElementById('ccaptcha');if(inp)inp.value='';
+  const err=document.getElementById('captchaErr');if(err)err.style.display='none';
+}
+newCaptcha();
+
+function collectEnquiry(){
+  const n=document.getElementById('cname').value.trim();
+  const p=document.getElementById('cphone').value.trim();
   const s=document.getElementById('cservice').value||'';
-  const m=document.getElementById('cmsg').value||'';
-  const body=encodeURIComponent(`Name: ${n}\nPhone: ${p}\nService: ${s}\n\n${m}`);
-  const subj=encodeURIComponent(`Callback request — ${s}`);
+  const m=document.getElementById('cmsg').value.trim();
+  const ans=parseInt(document.getElementById('ccaptcha').value,10);
+  const err=document.getElementById('captchaErr');
+  if(!n||!p){alert('Please enter your name and phone number.');return null;}
+  if(ans!==captchaA+captchaB){
+    if(err)err.style.display='block';
+    newCaptcha();
+    return null;
+  }
+  if(err)err.style.display='none';
+  return {n,p,s,m};
+}
+
+document.getElementById('sendMailBtn').addEventListener('click',()=>{
+  const d=collectEnquiry();if(!d)return;
+  const body=encodeURIComponent(`Name: ${d.n}\nPhone: ${d.p}\nService: ${d.s}\n\n${d.m}`);
+  const subj=encodeURIComponent(`Callback request — ${d.s}`);
   window.location.href=`mailto:info.cleanitr@gmail.com?subject=${subj}&body=${body}`;
+  newCaptcha();
+});
+
+document.getElementById('sendWaBtn').addEventListener('click',()=>{
+  const d=collectEnquiry();if(!d)return;
+  const text=encodeURIComponent(`Hi CleanITR, I'd like a callback.\nName: ${d.n}\nPhone: ${d.p}\nService: ${d.s}\n${d.m?('Message: '+d.m):''}`);
+  window.open(`https://wa.me/${WA_NUMBER}?text=${text}`,'_blank');
+  newCaptcha();
 });
 
 /* ===== BLOGS PREVIEW (latest 3 — full listing lives at /blog.html) ===== */
@@ -1517,6 +1594,10 @@ const catIcons={
 function fmtDate(iso){
   try{return new Date(iso).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});}catch(e){return '';}
 }
+function catLabel(cat){
+  const map={'Direct Tax Others':'Direct Tax','Indirect Tax Others':'Indirect Tax','Notices':'Others','General':'Others','MCA':'Corporate','TDS':'Direct Tax'};
+  return map[cat]||cat;
+}
 function renderBlogCards(posts){
   const grid=document.getElementById('blogGrid');
   if(!posts.length){grid.innerHTML='<p style="text-align:center;color:var(--ink-soft);grid-column:1/-1">No articles published yet — check back soon.</p>';return;}
@@ -1530,7 +1611,7 @@ function renderBlogCards(posts){
     const meta=[fmtDate(p.date),p.readtime].filter(Boolean).join(' · ');
     return `<a class="post reveal" href="/blog.html?post=${encodeURIComponent(p.slug)}">
         <div class="pimg ${colorClass}">
-          <span class="pcat">${p.category}</span>
+          <span class="pcat">${catLabel(p.category)}</span>
           ${imgHtml}
         </div>
         <div class="pbody">

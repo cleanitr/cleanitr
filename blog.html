@@ -13,6 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/tools/_calc.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 <style>
 .wrap{max-width:1180px}
 .hero-b{padding:56px 0 34px;text-align:center}
@@ -72,6 +74,40 @@
 .a-cta a{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--teal-deep);font-weight:700;padding:12px 24px;border-radius:11px;font-size:.94rem}
 .msg{grid-column:1/-1;text-align:center;color:var(--ink-soft);padding:40px 0}
 .scrollbar-top{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--teal));z-index:300}
+/* infographics */
+.infosec{padding:20px 0 80px;border-top:1px solid var(--line);margin-top:10px}
+.info-head{text-align:center;margin:36px 0 8px}
+.info-head h2{font-size:clamp(1.5rem,3.4vw,2.1rem);margin:8px 0 10px}
+.info-head .sub{margin:0 auto;max-width:560px}
+.infogrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:26px 0 0}
+@media(max-width:940px){.infogrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.infogrid{grid-template-columns:1fr}}
+.infocard{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:.22s;display:flex;flex-direction:column}
+.infocard:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(15,42,46,.12)}
+.infocard .thumb{position:relative;cursor:zoom-in;background:var(--teal-light);aspect-ratio:4/5;overflow:hidden}
+.infocard .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.infocard .icat{position:absolute;top:12px;left:12px;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.92);color:var(--teal);padding:5px 10px;border-radius:99px}
+.infocard .ibody{padding:16px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.infocard h3{font-size:.98rem;line-height:1.35}
+.infocard .idl{margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:.85rem;font-weight:700;color:#fff;background:var(--teal);padding:9px 14px;border-radius:10px}
+.infocard .idl:hover{background:var(--teal-deep)}
+.infocard .idl svg{width:15px;height:15px}
+/* lightbox */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(9,26,28,.86);z-index:500;padding:24px;align-items:center;justify-content:center}
+.lightbox.show{display:flex}
+.lb-inner{max-width:640px;width:100%;max-height:92vh;display:flex;flex-direction:column;background:#fff;border-radius:14px;overflow:hidden;position:relative}
+.lb-inner img{width:100%;height:auto;max-height:78vh;object-fit:contain;background:#f4f6f6}
+.lb-close{position:absolute;top:10px;right:12px;z-index:2;width:34px;height:34px;border:none;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer}
+.lb-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-top:1px solid var(--line)}
+.lb-bar span{font-weight:700;font-size:.95rem}
+.lb-dl{display:inline-flex;align-items:center;gap:7px;background:var(--teal);color:#fff;font-weight:700;font-size:.88rem;padding:9px 16px;border-radius:10px;white-space:nowrap}
+.lb-dl:hover{background:var(--teal-deep)}
+/* article action bar (PDF export) */
+.a-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 22px}
+.a-btn{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;padding:9px 16px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper-2);color:var(--teal);cursor:pointer;transition:.18s}
+.a-btn:hover{border-color:var(--teal);background:var(--teal-light)}
+.a-btn svg{width:16px;height:16px}
+.a-btn[disabled]{opacity:.6;cursor:wait}
 </style>
 </head>
 <body>
@@ -97,7 +133,34 @@
   <div class="wrap">
     <div class="bgrid" id="grid"><p class="msg">Loading articles…</p></div>
   </div>
+
+  <!-- INFOGRAPHICS -->
+  <section class="infosec" id="infoSection" style="display:none">
+    <div class="wrap">
+      <div class="info-head">
+        <span class="eyebrow">Save &amp; share</span>
+        <h2>Tax infographics</h2>
+        <p class="sub">Quick visual explainers you can download and keep — just like our Instagram posts.</p>
+      </div>
+      <div class="infogrid" id="infoGrid"></div>
+    </div>
+  </section>
 </main>
+
+<!-- INFOGRAPHIC LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lb-inner">
+    <button class="lb-close" onclick="closeLightbox(event,true)" aria-label="Close">&times;</button>
+    <img id="lbImg" src="" alt="">
+    <div class="lb-bar">
+      <span id="lbTitle"></span>
+      <a id="lbDownload" class="lb-dl" download href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- ARTICLE VIEW -->
 <article class="article" id="articleView">
@@ -132,7 +195,10 @@ const catIcons={
   Notices:'<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/>',
   TDS:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
   MCA:'<path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"/>',
-  General:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>'
+  General:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+  'Direct Tax':'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>',
+  'Indirect Tax':'<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>',
+  'Corporate Compliance':'<path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"/>'
 };
 let allPosts=[],bySlug={},activeCat='All';
 const grid=document.getElementById('grid');
@@ -141,11 +207,25 @@ const articleView=document.getElementById('articleView');
 
 function fmtDate(iso){try{return new Date(iso).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}catch(e){return ''}}
 
-// Categories are grouped: ITR, GST, and everything else (Notices, TDS, MCA, General) under "Others"
-function groupOf(cat){return (cat==='ITR'||cat==='GST')?cat:'Others'}
+// Top-level groups shown as filter chips:
+//   Direct Tax        -> ITR, TDS, Direct Tax Others
+//   Indirect Tax      -> GST, Indirect Tax Others
+//   Corporate Compliance
+//   Others            -> everything else (incl. legacy Notices / MCA / General)
+function groupOf(cat){
+  if(cat==='ITR'||cat==='TDS'||cat==='Direct Tax Others')return 'Direct Tax';
+  if(cat==='GST'||cat==='Indirect Tax Others')return 'Indirect Tax';
+  if(cat==='Corporate Compliance'||cat==='MCA')return 'Corporate Compliance';
+  return 'Others';
+}
+// Friendly label shown on cards for legacy/verbose category values
+function catLabel(cat){
+  const map={'Direct Tax Others':'Direct Tax','Indirect Tax Others':'Indirect Tax','Notices':'Others','General':'Others','MCA':'Corporate'};
+  return map[cat]||cat;
+}
+const GROUPS=['All','Direct Tax','Indirect Tax','Corporate Compliance','Others'];
 function renderChips(){
-  const cats=['All','ITR','GST','Others'];
-  document.getElementById('chips').innerHTML=cats.map(c=>
+  document.getElementById('chips').innerHTML=GROUPS.map(c=>
     `<button class="chip${c===activeCat?' on':''}" onclick="filterCat('${c}')">${c}</button>`).join('');
 }
 function filterCat(c){activeCat=c;renderChips();renderGrid()}
@@ -154,13 +234,13 @@ function renderGrid(){
   const posts=activeCat==='All'?allPosts:allPosts.filter(p=>groupOf(p.category)===activeCat);
   if(!posts.length){grid.innerHTML='<p class="msg">No articles in this category yet — check back soon.</p>';return}
   grid.innerHTML=posts.map(p=>{
-    const icon=catIcons[p.category]||catIcons.General;
+    const icon=catIcons[p.category]||catIcons[groupOf(p.category)]||catIcons.General;
     const img=p.image
       ?`<img src="${p.image}" alt="${p.title}" loading="lazy">`
       :`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${icon}</svg>`;
     const meta=[fmtDate(p.date),p.readtime].filter(Boolean).join(' · ');
     return `<div class="post" onclick="openPost('${p.slug}')">
-      <div class="pimg"><span class="pcat">${p.category}</span>${img}</div>
+      <div class="pimg"><span class="pcat">${catLabel(p.category)}</span>${img}</div>
       <div class="pbody">
         <span class="pdate">${meta}</span>
         <h3>${p.title}</h3>
@@ -178,9 +258,15 @@ function openPost(slug,push=true){
   // Cover image from the post — full width, height adapts automatically
   const cover=p.image?`<figure class="a-cover"><img src="${p.image}" alt="${p.title}"></figure>`:'';
   document.getElementById('articleBody').innerHTML=`
-    <span class="acat">${p.category}</span>
+    <span class="acat">${catLabel(p.category)}</span>
     <h1>${p.title}</h1>
     <div class="a-meta"><span>By Clean ITR Team</span><span class="dot"></span><span>${meta}</span></div>
+    <div class="a-actions">
+      <button class="a-btn" id="pdfBtn" onclick="exportPDF('${p.slug}')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></svg>
+        Download PDF
+      </button>
+    </div>
     ${cover}
     <div class="a-body">${p.bodyHtml}</div>`;
   listView.style.display='none';
@@ -200,14 +286,125 @@ window.addEventListener('popstate',()=>{
   if(slug&&bySlug[slug])openPost(slug,false);else showList(false);
 });
 
+// ===== Infographics =====
+function loadInfographics(){
+  fetch('/infographics.json?_='+Date.now()).then(r=>r.json()).then(items=>{
+    if(!items||!items.length)return;
+    const sec=document.getElementById('infoSection');
+    const grid=document.getElementById('infoGrid');
+    sec.style.display='';
+    grid.innerHTML=items.map(it=>`
+      <div class="infocard">
+        <div class="thumb" onclick="openLightbox('${encodeURIComponent(it.image)}','${(it.title||'').replace(/'/g,"\\'")}')">
+          <span class="icat">${catLabel(it.category)}</span>
+          <img src="${it.image}" alt="${it.title}" loading="lazy">
+        </div>
+        <div class="ibody">
+          <h3>${it.title}</h3>
+          <a class="idl" href="${it.image}" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Download
+          </a>
+        </div>
+      </div>`).join('');
+  }).catch(()=>{/* no infographics yet — silently ignore */});
+}
+function openLightbox(imgEnc,title){
+  const img=decodeURIComponent(imgEnc);
+  document.getElementById('lbImg').src=img;
+  document.getElementById('lbTitle').textContent=title||'';
+  const dl=document.getElementById('lbDownload');dl.href=img;
+  document.getElementById('lightbox').classList.add('show');
+}
+function closeLightbox(e,force){
+  if(force||e.target.id==='lightbox'){document.getElementById('lightbox').classList.remove('show');}
+}
+
+// ===== Branded PDF export =====
+async function exportPDF(slug){
+  const p=bySlug[slug];
+  if(!p){return;}
+  if(!window.jspdf||!window.html2canvas){alert('PDF tools are still loading — please try again in a moment.');return;}
+  const btn=document.getElementById('pdfBtn');
+  const orig=btn.innerHTML;
+  btn.disabled=true;btn.innerHTML='Preparing PDF…';
+
+  // Build a clean, print-styled clone off-screen (white bg, fixed width for crisp text)
+  const holder=document.createElement('div');
+  holder.style.cssText='position:fixed;left:-9999px;top:0;width:760px;background:#fff;padding:36px 44px;font-family:Inter,Arial,sans-serif;color:#0f2a2e;line-height:1.7';
+  const meta=[fmtDate(p.date),p.readtime].filter(Boolean).join(' · ');
+  holder.innerHTML=`
+    <div style="font-size:26px;font-weight:800;color:#0e7c66;margin-bottom:6px;font-family:Sora,Inter,Arial,sans-serif">${p.title}</div>
+    <div style="font-size:13px;color:#5b6b6d;margin-bottom:22px">${catLabel(p.category)} · By CleanITR Team · ${meta}</div>
+    ${p.image?`<img src="${p.image}" crossorigin="anonymous" style="width:100%;border-radius:10px;margin-bottom:22px">`:''}
+    <div style="font-size:15px">${p.bodyHtml}</div>`;
+  document.body.appendChild(holder);
+
+  try{
+    // wait for images inside the clone to load (so they render in the canvas)
+    await Promise.all([...holder.querySelectorAll('img')].map(img=>img.complete?Promise.resolve():new Promise(r=>{img.onload=img.onerror=r;})));
+
+    const canvas=await html2canvas(holder,{scale:2,useCORS:true,backgroundColor:'#ffffff'});
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF('p','pt','a4');
+    const pageW=pdf.internal.pageSize.getWidth();
+    const pageH=pdf.internal.pageSize.getHeight();
+    const marginX=40, headerH=54, footerH=34;
+    const contentW=pageW-marginX*2;
+    const usableH=pageH-headerH-footerH;
+
+    // scale the full-width canvas to content width, then slice per page
+    const imgW=contentW;
+    const ratio=imgW/canvas.width;
+    const sliceHpx=usableH/ratio;                 // canvas px that fit one page
+    const totalPages=Math.ceil(canvas.height/sliceHpx);
+
+    for(let i=0;i<totalPages;i++){
+      if(i>0)pdf.addPage();
+      // ----- Branded header -----
+      pdf.setFillColor(14,124,102);
+      pdf.rect(0,0,pageW,headerH,'F');
+      pdf.setTextColor(255,255,255);
+      pdf.setFont('helvetica','bold');pdf.setFontSize(17);
+      pdf.text('CleanITR',marginX,34);
+      pdf.setFont('helvetica','normal');pdf.setFontSize(9);
+      pdf.text('Tax Platform by Chartered Accountants',pageW-marginX,32,{align:'right'});
+      // ----- Content slice -----
+      const slice=document.createElement('canvas');
+      slice.width=canvas.width;
+      slice.height=Math.min(sliceHpx,canvas.height-i*sliceHpx);
+      slice.getContext('2d').drawImage(canvas,0,i*sliceHpx,canvas.width,slice.height,0,0,canvas.width,slice.height);
+      const sliceImgH=slice.height*ratio;
+      pdf.addImage(slice.toDataURL('image/jpeg',0.92),'JPEG',marginX,headerH+8,imgW,sliceImgH);
+      // ----- Branded footer -----
+      pdf.setDrawColor(220,224,224);pdf.line(marginX,pageH-footerH,pageW-marginX,pageH-footerH);
+      pdf.setTextColor(120,130,132);pdf.setFontSize(8);
+      pdf.text('© 2026 CleanITR · cleanitr.netlify.app · info.cleanitr@gmail.com',marginX,pageH-16);
+      pdf.text(`Page ${i+1} of ${totalPages}`,pageW-marginX,pageH-16,{align:'right'});
+    }
+    const fname=(slug||'cleanitr-article').replace(/[^a-z0-9\-]+/gi,'-').slice(0,60);
+    pdf.save('CleanITR-'+fname+'.pdf');
+  }catch(err){
+    console.error(err);
+    alert('Sorry, PDF export failed. Please try again.');
+  }finally{
+    holder.remove();
+    btn.disabled=false;btn.innerHTML=orig;
+  }
+}
+
 fetch('/posts.json?_='+Date.now()).then(r=>r.json()).then(posts=>{
   allPosts=posts;
   bySlug=Object.fromEntries(posts.map(p=>[p.slug,p]));
   const params=new URLSearchParams(location.search);
-  const cat=params.get('cat');
-  if(cat&&['ITR','GST','Others'].includes(cat))activeCat=cat;
+  let cat=params.get('cat');
+  // map legacy links (?cat=ITR / ?cat=GST) to the new top-level groups
+  const legacy={ITR:'Direct Tax',TDS:'Direct Tax',GST:'Indirect Tax',MCA:'Corporate Compliance'};
+  if(cat&&legacy[cat])cat=legacy[cat];
+  if(cat&&GROUPS.includes(cat))activeCat=cat;
   renderChips();
   renderGrid();
+  loadInfographics();
   const slug=params.get('post');
   if(slug&&bySlug[slug])openPost(slug,false);
 }).catch(err=>{

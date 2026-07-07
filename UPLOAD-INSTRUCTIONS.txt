@@ -1,0 +1,16 @@
+CleanITR — updated files (upload these to your GitHub repo)
+
+Folder structure is already correct. Just place each item at the SAME path in your repo:
+
+  index.html            -> repo root (replace existing)
+  blog.html             -> repo root (replace existing)
+  build-blogs.js        -> repo root (replace existing)
+  admin/config.yml      -> replace existing admin/config.yml
+  infographics/         -> NEW folder, upload both files inside it
+       2026-07-06-old-vs-new-tax-regime-at-a-glance.md
+       README.md
+
+Do NOT upload this .txt file to the repo — it's just for you.
+
+After committing, Netlify rebuilds automatically and generates posts.json + infographics.json.
+WhatsApp number is already set to 917838808704.

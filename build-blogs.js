@@ -67,3 +67,48 @@ posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 fs.writeFileSync(outFile, JSON.stringify(posts, null, 2));
 console.log(`✅ Generated posts.json with ${posts.length} post(s).`);
+
+/* ============================================================
+ * INFOGRAPHICS  ->  infographics.json
+ * Same idea as posts: each markdown file in /infographics becomes
+ * a JS object the site fetches to render a downloadable image gallery.
+ * ========================================================== */
+const infoDir = path.join(__dirname, 'infographics');
+const infoOut = path.join(__dirname, 'infographics.json');
+
+if (!fs.existsSync(infoDir)) {
+  fs.writeFileSync(infoOut, '[]');
+  console.log('No /infographics folder found — writing empty infographics.json');
+} else {
+  const infoFiles = fs
+    .readdirSync(infoDir)
+    .filter((f) => f.toLowerCase().endsWith('.md') && f.toLowerCase() !== 'readme.md');
+
+  const infographics = infoFiles
+    .map((filename) => {
+      try {
+        const raw = fs.readFileSync(path.join(infoDir, filename), 'utf8');
+        const { data } = matter(raw);
+        const slug = filename
+          .replace(/\.md$/i, '')
+          .replace(/^\d{4}-\d{2}-\d{2}-/, '');
+        return {
+          slug,
+          title: data.title || 'Untitled',
+          category: data.category || 'Others',
+          date: data.date ? new Date(data.date).toISOString() : new Date().toISOString(),
+          image: data.image || '',
+          summary: data.summary || '',
+        };
+      } catch (err) {
+        console.error(`Skipping infographic ${filename} — ${err.message}`);
+        return null;
+      }
+    })
+    .filter(Boolean)
+    .filter((i) => i.image); // an infographic without an image is useless
+
+  infographics.sort((a, b) => new Date(b.date) - new Date(a.date));
+  fs.writeFileSync(infoOut, JSON.stringify(infographics, null, 2));
+  console.log(`✅ Generated infographics.json with ${infographics.length} item(s).`);
+}
